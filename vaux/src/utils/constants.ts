@@ -23,7 +23,7 @@ export const Constants = {
 		]
 	},
 	optionDropdownDataProducts: [
-		{ label: "Text to Speech", link: "" },
+		{ label: "Text to Speech", link: "/signup" },
 	],
 	optionDropdownDataProfile: [
 		{ label: "My Account", link: "/user-profile" },

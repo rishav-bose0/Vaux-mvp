@@ -74,12 +74,12 @@ const AIVoiceItemHome = (props: AIVoiceItemHomePropsInterface) => {
 	return (
 		<div className="flex flex-col w-[250px] justify-center items-center gap-2 relative">
 			<div
-				className=" w-[206px] h-[206px] rounded-[50%] bg-primary"
+				className=" w-[216px] h-[206px] rounded-[50%] bg-primary"
 			>
 				<img
 					src={imageObj[AIVoiceItem.img_id as keyof typeof imageObj]}
 					alt="AI voice Avatar"
-					className="absolute z-[1] left-[50%] top-[-100px] min-w-[250px]"
+					className="absolute z-[1] left-[50%] top-[-70px] min-w-[250px]"
 					width={260}
 					style={{ transform: "translate(-50%, 0%)" }}
 				/>

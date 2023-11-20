@@ -16,7 +16,7 @@ import { useLocalStorage } from "hooks/useLocalStorage";
 import { SelectedProjectContext } from "context/SelectedProjectContext";
 import ContactUs from "components/common/ContactUs";
 import Email from "@mui/icons-material/Email";
-import LOGO from "assets/logo.jpeg";
+import LOGO from "assets/voaux-profile-logo.png";
 
 function AuthHeader() {
 	const { logout }: any = useAuth();
@@ -62,7 +62,7 @@ function AuthHeader() {
 	};
 	return (
 		<nav className="sticky top-0 flex flex-wrap items-center justify-between z-20 w-full p-0 border-b border-gray-300 bg-white">
-			<div className="flex bg-primary w-[90px] h-[67px] items-center justify-center">
+			<div className="flex w-[90px] h-[67px] items-center justify-center">
 				<a href="/studio">
 					<div className="flex">
 					<img
