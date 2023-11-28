@@ -95,6 +95,20 @@ const ExploreAI = (props: ExploreAIProps) => {
 		handleCloseModal();
 	};
 
+	const [searchTerm, setSearchTerm] = useState('');
+	const filterByName = (voiceList: Array<VAUX_AI_VOICES>, term: string) => {
+		return voiceList.filter((voice) =>
+			voice.Name.toLowerCase().includes(term.toLowerCase())
+		);
+	};
+
+	const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchTerm(event.target.value);
+	};
+
+	// Filter the voices based on the search term
+	const filteredByNameVoices = filterByName(filteredVoices, searchTerm);
+
 	return (
 		<div>
 			<div className="flex items-center justify-between px-4 py-3 bg-white border-solid border-b-[1px] border-gray-300">
@@ -114,7 +128,7 @@ const ExploreAI = (props: ExploreAIProps) => {
 				</button>
 			</div>
 			<div className="grid grid-cols-[240px_auto]">
-				<div className="w-[240px] flex flex-col items-center p-5 border-solid border-gray-300 border-r-[1px]">
+				<div className="w-[240px] flex flex-col items-center p-5 border-solid border-gray-300 border-r-[1px] gap-5">
 					<div className="flex">
 						<div className="inline-flex shadow-sm rounded-[40px] border-solid border-[1px] border-[rgba(25, 118, 210, 0.5)]">
 							<button
@@ -150,29 +164,67 @@ const ExploreAI = (props: ExploreAIProps) => {
 							>
 								Female
 							</button>
+
+						</div>
+					</div>
+					<div className="flex">
+						<div className="inline-flex shadow-sm rounded-[40px] border-solid border-[1px] border-[rgba(25, 118, 210, 0.5)]">
+							<input
+								type="text"
+								placeholder="Search by name..."
+								className="border-solid border-[1px] border-gray-300 rounded-md p-2 focus:outline-none"
+								value={searchTerm}
+								onChange={handleSearch}
+							/>
+							<svg
+								className="absolute right-3 top-2 h-5 w-5 text-gray-500 pointer-events-none"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+							</svg>
 						</div>
 					</div>
 				</div>
-				{filteredVoices && (
-					<div className="flex m-auto gap-3 flex-wrap  bg-gray-100 p-5 justify-center max-h-[70vh] overflow-y-scroll ">
-						{filteredVoices.map((voice: any) => {
-							return (
-								<ExploreAIVoiceItem
-									key={voice.Id}
-									SelectCallbackFunc={() => {
-										voiceCallbackFunctionHandler(voice);
-									}}
-									isSelectionRequired={isSelectionRequired}
-									AIVoiceItem={voice}
-									isAudioPlaying={isAudioPlaying}
-									setIsAudioPlaying={setIsAudioPlaying}
-									isAnyAudioSelected={isAnyAudioSelected}
-									setIsAnyAudioSelected={setIsAnyAudioSelected}
-								/>
-							);
-						})}
-					</div>
-				)}
+				<div className="flex m-auto gap-3 flex-wrap  bg-gray-100 p-5 justify-center max-h-[70vh] overflow-y-scroll ">
+					{!searchTerm?.length && filteredVoices &&
+							filteredVoices.map((voice: any) => {
+								return (
+									<ExploreAIVoiceItem
+										key={voice.Id}
+										SelectCallbackFunc={() => {
+											voiceCallbackFunctionHandler(voice);
+										}}
+										isSelectionRequired={isSelectionRequired}
+										AIVoiceItem={voice}
+										isAudioPlaying={isAudioPlaying}
+										setIsAudioPlaying={setIsAudioPlaying}
+										isAnyAudioSelected={isAnyAudioSelected}
+										setIsAnyAudioSelected={setIsAnyAudioSelected}
+									/>
+								);
+							})
+					}
+					{searchTerm.length > 0 &&
+							filteredByNameVoices.map((voice: any) => {
+								return (
+									<ExploreAIVoiceItem
+										key={voice.Id}
+										SelectCallbackFunc={() => {
+											voiceCallbackFunctionHandler(voice);
+										}}
+										isSelectionRequired={isSelectionRequired}
+										AIVoiceItem={voice}
+										isAudioPlaying={isAudioPlaying}
+										setIsAudioPlaying={setIsAudioPlaying}
+										isAnyAudioSelected={isAnyAudioSelected}
+										setIsAnyAudioSelected={setIsAnyAudioSelected}
+									/>
+								);
+							})
+					}
+				</div>
 			</div>
 		</div>
 	);

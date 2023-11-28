@@ -205,37 +205,38 @@ function GenerateAIBlock({
 										}
 									</Select>
 								</div>
-								<ClickAwayListener onClickAway={() => setOpenPitch(false)}>
-									<div className="relative">
-										<div
-											className="flex rounded-3xl font-medium border border-gray-300 justify-center items-center px-2 py-1 text-xs cursor-pointer"
-											onClick={() => {
-												setOpenSpeed(false);
-												setOpenPitch(!openPitch);
-											}}
-										>
-											<span>{`Pitch`}</span>
-											<DownArrow className="fill-primary mx-1" />
-										</div>
-										{openPitch && (
-											<>
-												<div className="absolute top-[110%] left-[40%] w-[0px] h-[0px] border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[12px]"></div>
-												<SliderDropdown positionStyles={`top-[145%] left-[-174%]`} sliderValue={generateBlockDetail.pitch} stepValue={1}
-													sliderChanged={(value) => updateGenerateBlockDetail("pitch", value)} defaultValue={0} min={-50} max={50} sliderOptions={pitchSliderOptions} />
-											</>
-										)}
-									</div>
-								</ClickAwayListener>
+								{/*<ClickAwayListener onClickAway={() => setOpenPitch(false)}>*/}
+								{/*	<div className="relative">*/}
+								{/*		<div*/}
+								{/*			className="flex rounded-3xl font-medium border border-gray-300 justify-center items-center px-2 py-1 text-xs cursor-pointer"*/}
+								{/*			onClick={() => {*/}
+								{/*				setOpenSpeed(false);*/}
+								{/*				setOpenPitch(!openPitch);*/}
+								{/*			}}*/}
+								{/*		>*/}
+								{/*			<span>{`Pitch`}</span>*/}
+								{/*			<DownArrow className="fill-primary mx-1" />*/}
+								{/*		</div>*/}
+								{/*		{openPitch && (*/}
+								{/*			<>*/}
+								{/*				<div className="absolute top-[110%] left-[40%] w-[0px] h-[0px] border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[12px]"></div>*/}
+								{/*				<SliderDropdown positionStyles={`top-[145%] left-[-174%]`} sliderValue={generateBlockDetail.pitch} stepValue={1}*/}
+								{/*					sliderChanged={(value) => updateGenerateBlockDetail("pitch", value)} defaultValue={0} min={-50} max={50} sliderOptions={pitchSliderOptions} />*/}
+								{/*			</>*/}
+								{/*		)}*/}
+								{/*	</div>*/}
+								{/*</ClickAwayListener>*/}
 								<ClickAwayListener onClickAway={() => setOpenSpeed(false)}>
 									<div className="relative">
 										<div
-											className="flex rounded-3xl font-medium border border-gray-300 justify-center items-center px-2 py-1 text-xs cursor-pointer"
+											className="flex rounded-3xl font-medium border border-gray-300 justify-center items-center px-2 py-1 text-xs cursor-pointer h-[33px]"
 											onClick={() => {
 												setOpenPitch(false);
 												setOpenSpeed(!openSpeed);
 											}}
 										>
-											<span>{`Duration`}</span>
+											<span style={{
+												padding: ' 0 0.2rem 0rem 0.5rem' }}>{`Duration`}</span>
 											<DownArrow className="fill-primary mx-1" />
 										</div>
 										{openSpeed && (
