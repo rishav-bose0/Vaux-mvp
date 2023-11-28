@@ -1,10 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { getAllAIVoiceSample } from "actions/APIActions";
 import ExploreAIVoiceItem from "./ExploreAIItem";
 import { VAUX_AI_VOICES } from "utils/APIResponseTypes";
 import { useCookie } from "hooks/useCookie";
-import { AiVoicesContext } from 'context/AiVoicesContext';
+import { AiVoicesContext } from "context/AiVoicesContext";
 import { useLocalStorage } from "hooks/useLocalStorage";
+import usePageVisibility from "hooks/usePageVisibility";
 interface ExploreAIProps {
 	isSelectionRequired?: boolean;
 	selectedAiVoice?: VAUX_AI_VOICES;
@@ -17,21 +18,37 @@ const ExploreAI = (props: ExploreAIProps) => {
 	const [filteredVoices, setFilteredVoices] = useState<Array<VAUX_AI_VOICES>>(
 		[],
 	);
-	const [isAudioPlaying, setIsAudioPlaying] = useState(-1);
-	const [isAnyAudioSelected, setIsAnyAudioSelected] = useState(props.selectedAiVoice?.Id ?? -1);
+	const [isAudioPlaying, setIsAudioPlaying] = useState<string>("");
+	const [isAnyAudioSelected, setIsAnyAudioSelected] = useState(
+		props.selectedAiVoice?.Id ?? -1,
+	);
 	const [filterAIVoices, setFilterAIVoices] = useState({
 		gender: "ALL",
 	});
-	const [token, setToken] = useLocalStorage("vaux-staff-token", JSON.stringify(null));
+	const [token, setToken] = useLocalStorage(
+		"vaux-staff-token",
+		JSON.stringify(null),
+	);
 	const { addAiVoice } = useContext(AiVoicesContext);
+	const isVisible = usePageVisibility();
 
 	useEffect(() => {
-		setIsAnyAudioSelected(props.selectedAiVoice?.Id ?? -1);	
-	}, [props.selectedAiVoice?.Id])
+		if (!isVisible && isAudioPlaying.length) {
+			const audioId: HTMLAudioElement | any =
+				document.getElementById(isAudioPlaying);
+			if (audioId && !audioId.paused) {
+				audioId.pause();
+			}
+		}
+	}, [isVisible]);
+
+	useEffect(() => {
+		setIsAnyAudioSelected(props.selectedAiVoice?.Id ?? -1);
+	}, [props.selectedAiVoice?.Id]);
 
 	useEffect(() => {
 		const getAllAIVoices = async () => {
-			const voices = await getAllAIVoiceSample(token,false);
+			const voices = await getAllAIVoiceSample(token, false);
 			// const voices = List_all_voicesMockData;
 			if (voices && voices.length) {
 				setAIVoices(voices);
@@ -64,10 +81,20 @@ const ExploreAI = (props: ExploreAIProps) => {
 	};
 
 	const voiceCallbackFunctionHandler = (voice: VAUX_AI_VOICES) => {
-		console.log('hello');
 		handleCloseModal();
 		SelectCallbackFunc && SelectCallbackFunc(voice);
-	}
+	};
+	const modalCloseWrapper = () => {
+		console.log(isAudioPlaying, "dddd");
+		const audioId: HTMLAudioElement | any =
+			document.getElementById(isAudioPlaying);
+
+		if (audioId && !audioId.paused) {
+			audioId.pause();
+			// isAudioPlaying.pause();
+		}
+		handleCloseModal();
+	};
 
 	return (
 		<div>
@@ -78,7 +105,7 @@ const ExploreAI = (props: ExploreAIProps) => {
 						Choose from 100+ voices
 					</div>
 				</div>
-				<button onClick={handleCloseModal}>
+				<button onClick={modalCloseWrapper}>
 					<svg data-icon="cross" width="16" height="16" viewBox="0 0 16 16">
 						<path
 							d="M9.41 8l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 00-1.71-.71L8 6.59l-3.29-3.3a1.003 1.003 0 00-1.42 1.42L6.59 8 3.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 001.71.71L8 9.41l3.29 3.29c.18.19.43.3.71.3a1.003 1.003 0 00.71-1.71L9.41 8z"
@@ -90,8 +117,9 @@ const ExploreAI = (props: ExploreAIProps) => {
 			<div className="grid grid-cols-[240px_auto]">
 				<div className="w-[240px] flex flex-col items-center p-5 border-solid border-gray-300 border-r-[1px]">
 					<div className="flex">
-						<div className="inline-flex shadow-sm rounded-[40px] border-solid border-[1px] border-[rgba(25, 118, 210, 0.5)]" >
-							<button type="button"
+						<div className="inline-flex shadow-sm rounded-[40px] border-solid border-[1px] border-[rgba(25, 118, 210, 0.5)]">
+							<button
+								type="button"
 								className={`${
 									filterAIVoices.gender === "ALL"
 										? "text-white bg-primary"
@@ -101,7 +129,8 @@ const ExploreAI = (props: ExploreAIProps) => {
 							>
 								All
 							</button>
-							<button type="button"
+							<button
+								type="button"
 								className={`${
 									filterAIVoices.gender === "M"
 										? "text-white bg-primary"
@@ -111,7 +140,8 @@ const ExploreAI = (props: ExploreAIProps) => {
 							>
 								Male
 							</button>
-							<button type="button"
+							<button
+								type="button"
 								className={`${
 									filterAIVoices.gender === "F"
 										? "text-white bg-primary"
@@ -130,7 +160,9 @@ const ExploreAI = (props: ExploreAIProps) => {
 							return (
 								<ExploreAIVoiceItem
 									key={voice.Id}
-									SelectCallbackFunc={() => {voiceCallbackFunctionHandler(voice);}}
+									SelectCallbackFunc={() => {
+										voiceCallbackFunctionHandler(voice);
+									}}
 									isSelectionRequired={isSelectionRequired}
 									AIVoiceItem={voice}
 									isAudioPlaying={isAudioPlaying}

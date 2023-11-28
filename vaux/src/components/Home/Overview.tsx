@@ -86,8 +86,7 @@ function Overview() {
           <AIVoicesListHome />
           <div className='flex flex-col items-center my-8'>
             <span className='text-xl md:text-3xl font-normal font-ink-free mb-6'>{".... And many other voices to choose from"}</span>
-            <h1 className='text-3xl md:text-5xl font-semibold mb-6'>{'Every necessity has a corresponding voice'}</h1>
-            {/*<span className='text-xl md:text-3xl font-normal font-ink-free mb-6'>{"It's as if you've spoken without uttering a word."}</span>*/}
+            <h1 className='text-xl md:text-4xl font-semibold mb-6'>{'Every necessity has a corresponding voice'}</h1>
             <div>
               <button className='rounded-xmd border border-primary bg-primary text-white hover:bg-white hover:text-primary font-semibold px-12 py-3 mt-4' onClick={() => routeChange('/login')}>Start Now Free</button>
             </div>
