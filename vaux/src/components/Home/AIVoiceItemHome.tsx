@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import playBtn from "assets/play.svg";
-import { fetchAIVoicePreview } from "actions/APIActions";
 import Avatar_male_1 from "assets/M1.png";
 import Avatar_male_2 from "assets/M2.png";
 import Avatar_female_1 from "assets/F1.png";
@@ -40,27 +39,19 @@ const AIVoiceItemHome = (props: AIVoiceItemHomePropsInterface) => {
 		F1: Avatar_female_1,
 		F2: Avatar_female_2,
 	};
-	// const fetchAIVoiceAudioLink = async (VoiceId: number, name: string) => {
-	// 	// const url = await fetchAIVoicePreview(VoiceId, name);
-	// 	const url = await fetchAIVoicePreview(VoiceId, name);
-	// 	if (url) {
-	// 		setAiAudioLink(url);
-	// 	}
-	// };
 
-	const audioPlayHandler = async () => {
+	const audioPlayHandler = () => {
 		setIsAudioPlaying(AIVoiceItem.Id);
 		ref.current?.play();
 		if (!AIAudioLink?.length) {
 			setAiAudioLink(AIVoiceItem.Preview_link);
-			// await fetchAIVoiceAudioLink(AIVoiceItem.Id, AIVoiceItem.Name);
 		}
 	};
 	const audioPauseHandler = () => {
 		ref.current?.pause();
 	};
 	useEffect(() => {
-		const fetchAIVoiceAudioLink = async () => {
+		const fetchAIVoiceAudioLink = () => {
 			const url = AIVoiceItem.Preview_link
 			if (url) {
 				setAiAudioLink(url);
