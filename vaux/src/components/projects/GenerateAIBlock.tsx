@@ -107,8 +107,10 @@ function GenerateAIBlock({
         setSelectedAIVoice(result ?? aiVoices[0]);
     }, [blockDetail]);
 
-    const updateGenerateBlockDetail = (key: string, value: string | number) => {
+
+    const updateGenerateBlockDetail = (key: string, value: string | number | boolean) => {
         let block = {...generateBlockDetail, [key]: value};
+        console.log('Key is ' + key);
         if (key == "text") {
             const words = value.toString().split(/\s+/);
             const wordCount = words.length
@@ -121,6 +123,9 @@ function GenerateAIBlock({
                 alert("Word limit per block exceeded. Please create a new block and add text");
             }
         }
+        block["is_tts_generated"]= false;
+        console.log(block.is_tts_generated)
+        console.log(block.text)
         setGenerateBlockDetail(() => {
             return {...block};
         });
@@ -138,7 +143,7 @@ function GenerateAIBlock({
             generateBlockDetail.text.length > 0
         ) {
             setIsloading(true);
-            const payload = {
+            const payload: any = {
                 project_id: generateBlockDetail.project_id,
                 text: generateBlockDetail.text,
                 language: generateBlockDetail.language,
@@ -147,6 +152,7 @@ function GenerateAIBlock({
                 duration: generateBlockDetail.duration,
                 block_number: generateBlockDetail.block_number,
                 pitch: generateBlockDetail.pitch,
+                is_tts_generated: generateBlockDetail.is_tts_generated,
             };
             const link = await generateTTS(token, [payload]);
             if (link) {
@@ -293,9 +299,10 @@ function GenerateAIBlock({
                         <div>
                             <input
                                 value={generateBlockDetail.text}
-                                onChange={(event) =>
-                                    updateGenerateBlockDetail("text", event?.target?.value)
-                                }
+                                onChange={(event) => {
+                                    updateGenerateBlockDetail("text", event?.target?.value);
+                                    // updateGenerateBlockDetail("is_tts_generated", false);
+                                }}
                                 type="text"
                                 placeholder="Enter your text here"
                                 className="text-sm font-normal border border-gray-300 rounded-md w-full p-2 mt-4 focus-visible:outline-none"
@@ -309,6 +316,17 @@ function GenerateAIBlock({
                                     controls
                                     controlsList={"nofullscreen nodownload "}
                                     src={AudioLink}
+                                    ref={ttsAudioRef}
+                                />
+                            </div>
+                        )}
+                        {!AudioLink && generateBlockDetail.speech_s3_link?.length > 0 &&(
+                            <div className="mt-3 w-full ">
+                                <audio
+                                    className="w-full h-[32px]"
+                                    controls
+                                    controlsList={"nofullscreen nodownload "}
+                                    src={generateBlockDetail.speech_s3_link}
                                     ref={ttsAudioRef}
                                 />
                             </div>

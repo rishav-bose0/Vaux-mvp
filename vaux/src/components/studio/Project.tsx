@@ -20,7 +20,7 @@ function Project() {
   const { id } = useParams();
   const { aiVoices } = useContext(AiVoicesContext);
   const { setSelectedProject } = useContext(SelectedProjectContext);
-  const [generateVoiceBlocks, setGenerateVoiceBlocks] = useState<VAUX_GENERATE_TTS[]>([{ project_id: id ?? '', speaker_id: aiVoices[0]?.Id, text: '', language: 'en', emotion: 'neutral', duration: 0, pitch: 0, block_number: 0 }]);
+  const [generateVoiceBlocks, setGenerateVoiceBlocks] = useState<VAUX_GENERATE_TTS[]>([{ project_id: id ?? '', speaker_id: aiVoices[0]?.Id, text: '', language: 'en', emotion: 'neutral', duration: 0, pitch: 0, block_number: 0, speech_s3_link: '' , is_tts_generated: true}]);
   const [loading, setLoading] = useState(false);
   const [apiLoading, setapiLoading] = useState(false); 
   const [playAllAudioLink, setPlayAllAudioLink] = useState('');
@@ -28,7 +28,7 @@ function Project() {
   const addBlockHandler = () => {
     if (id && aiVoices?.length > 0) {
       setGenerateVoiceBlocks((prev: VAUX_GENERATE_TTS[]) => {
-        return [...prev, { project_id: id, speaker_id: aiVoices[0]?.Id, text: '', language: 'en', emotion: 'neutral', duration: 1, pitch: 0, block_number: generateVoiceBlocks.length }];
+        return [...prev, { project_id: id, speaker_id: aiVoices[0]?.Id, text: '', language: 'en', emotion: 'neutral', duration: 1, pitch: 0, block_number: generateVoiceBlocks.length , speech_s3_link: '', is_tts_generated:true}];
       });
     }
   }
@@ -42,7 +42,7 @@ function Project() {
         if (result.length > 0) {
           const list: VAUX_GENERATE_TTS[] = [];
           result.forEach((item: any, index: number) => {
-            list.push({ ...item.tts_details, project_id: id, language: 'en', speaker_id: item.speaker_details?.id, block_number: index });
+            list.push({ ...item.tts_details, project_id: id, language: 'en', speaker_id: item.speaker_details?.id, block_number: index, is_tts_generated: true });
           });
           setGenerateVoiceBlocks([...list]);
         }

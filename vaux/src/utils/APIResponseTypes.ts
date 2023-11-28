@@ -55,5 +55,7 @@ export interface VAUX_GENERATE_TTS {
     emotion: string;
     duration: number;
     pitch: number;
-    block_number: number
+    block_number: number;
+    speech_s3_link: string;
+    is_tts_generated: boolean
 }
