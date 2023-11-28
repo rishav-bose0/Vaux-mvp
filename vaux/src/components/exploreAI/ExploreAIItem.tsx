@@ -40,25 +40,12 @@ const ExploreAIVoiceItem = (props: ExploreAIVoiceItemPropsInterface) => {
 	const [isAudioSelected, setIsAudioSelected] = useState(props.isAnyAudioSelected === AIVoiceItem?.Id ?? false);
 	const [isLoading, setIsLoading] = useState(false);
 	const fetchAIVoiceAudioLink = async () => {
-		const url = await fetchAIVoicePreview(AIVoiceItem.Id, AIVoiceItem.Name);
-		// const url = Voice_preview_MockData.Preview_link;
-		// const url = await fetchAIVoicePreview("55", "Timothy");
-	
+		const url = AIVoiceItem.Preview_link
+		// console.log("URL is " + url)
 		if (url) {
 			setAiAudioLink(url);
-			// setIsLoading(false);
-			// setDisplayControls((prev) => {
-			// 	return { ...prev, display: "", opacity: "opacity-100" };
-			// });
-			// setDisplayControls((prev) => {
-			// 	return { ...prev, display: "", opacity: "opacity-100" };
-			// });
 			return
 		}
-		// setIsLoading(false);
-		// setDisplayControls((prev) => {
-		// 	return { ...prev, display: "", opacity: "opacity-100" };
-		// });
 	};
 	// fetchAIVoiceAudioLink();
 	const audioPlayHandler = async () => {

@@ -110,7 +110,7 @@ function GenerateAIBlock({
 
     const updateGenerateBlockDetail = (key: string, value: string | number | boolean) => {
         let block = {...generateBlockDetail, [key]: value};
-        console.log('Key is ' + key);
+        // console.log('Key is ' + key);
         if (key == "text") {
             const words = value.toString().split(/\s+/);
             const wordCount = words.length
@@ -124,8 +124,8 @@ function GenerateAIBlock({
             }
         }
         block["is_tts_generated"]= false;
-        console.log(block.is_tts_generated)
-        console.log(block.text)
+        // console.log(block.is_tts_generated)
+        // console.log(block.text)
         setGenerateBlockDetail(() => {
             return {...block};
         });

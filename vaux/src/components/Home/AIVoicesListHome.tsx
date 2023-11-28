@@ -30,6 +30,7 @@ const AIVoicesListHome = () => {
 					Language: string;
 					Emotion: Array<string>;
 					Country: string;
+					Preview_link: string;
 				}) => {
 					return (
 						<AIVoiceItemHome
