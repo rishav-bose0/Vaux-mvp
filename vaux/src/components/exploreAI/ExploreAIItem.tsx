@@ -5,10 +5,11 @@ import { VAUX_AI_VOICES } from "utils/APIResponseTypes";
 import { fetchAIVoicePreview } from "actions/APIActions";
 import { Constants } from "utils/constants";
 import smallLoader from "assets/smallLoader.svg";
+import premium_icon from "assets/premium.png";
 interface ExploreAIVoiceItemPropsInterface {
 	AIVoiceItem: VAUX_AI_VOICES;
-	isAudioPlaying: number;
-	setIsAudioPlaying: React.Dispatch<React.SetStateAction<number>>;
+	isAudioPlaying: string;
+	setIsAudioPlaying: React.Dispatch<React.SetStateAction<string>>;
 	isSelectionRequired?: boolean;
 	SelectCallbackFunc?: () => void;
 	isAnyAudioSelected: number;
@@ -41,31 +42,38 @@ const ExploreAIVoiceItem = (props: ExploreAIVoiceItemPropsInterface) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const fetchAIVoiceAudioLink = async () => {
 		const url = AIVoiceItem.Preview_link
-		// console.log("URL is " + url)
 		if (url) {
 			setAiAudioLink(url);
+			if(ref.current){
+				ref.current.src = url;
+				fetch(url);
+			}
 			return
+		}else{
+			setIsLoading(false)
 		}
 	};
-	// fetchAIVoiceAudioLink();
+
 	const audioPlayHandler = async () => {
 		if (!AIAudioLink?.length) {
-			setIsLoading(true);
 			setDisplayControls((prev) => {
 				return { ...prev, display: "", opacity: "opacity-50" };
 			});
+			setIsLoading(true);
 			await fetchAIVoiceAudioLink();
-			setIsLoading(false);
 		}
-		setIsAudioPlaying(AIVoiceItem.Id);
+		if(ref.current){
+			setIsAudioPlaying(ref.current.id);
+		} 
+		
 		if (ref.current && ref.current.currentTime > 0) {
 			ref.current.currentTime = 0;
 		}
-		ref.current?.play();
+		AIAudioLink && ref.current?.play();
 		setDisplayControls((prev) => {
 			return { ...prev, display: "", opacity: "opacity-50" };
 		});
-		
+		// setIsLoading(false);
 	};
 	const audioPauseHandler = () => {
 		ref.current?.pause();
@@ -84,7 +92,7 @@ const ExploreAIVoiceItem = (props: ExploreAIVoiceItemPropsInterface) => {
 		SelectCallbackFunc && SelectCallbackFunc();
 	};
 	useEffect(() => {
-		if (isAudioPlaying !== AIVoiceItem.Id && !ref.current?.paused) {
+		if (isAudioPlaying !== ref.current?.id && !ref.current?.paused) {
 			ref.current?.pause();
 			setDisplayControls((prev) => {
 				return { ...prev, display: "hidden", opacity: "opacity-100" };
@@ -101,6 +109,13 @@ const ExploreAIVoiceItem = (props: ExploreAIVoiceItemPropsInterface) => {
 
 	return (
 		<div className="flex  group flex-col px-2 pt-2 pb-5 cursor-pointer  w-[150px] h-[180px] hover:shadow-lg hover:border-primary hover:border-2 justify-center items-center gap-2 relative border-[1px] border-gray-300 rounded-lg  border-solid bg-white ">
+			{
+				AIVoiceItem.Is_Premium && (
+					<div className="text-sm font-normal absolute top-1 right-1 transform rotate-[45deg]">
+						<img src={premium_icon} style={{ width: '50px', height: '50px' }} alt="Premium" />
+					</div>
+				)
+			}
 			<div className="w-[64px] h-[64px] rounded-[50%]  z-[1] relative">
 				<img
 					src={AIVoiceItem.Img_url}
@@ -157,9 +172,10 @@ const ExploreAIVoiceItem = (props: ExploreAIVoiceItemPropsInterface) => {
 			{/* <div className="w-[150px] h-[200px] absolute top-0 hover:backdrop-blur-[1px] z-[1] flex items-center justify-center "> */}
 			{/* <img src={playBtn} alt="play" className="cursor-pointer hidden group-hover:block" width={64}  /> */}
 			{/* </div> */}
-			{AIAudioLink && (
+			{(
 				<audio
 					autoPlay
+					preload="auto"
 					src={AIAudioLink}
 					ref={ref}
 					id={`${AIVoiceItem.Id}_${AIVoiceItem.Name}_${AIVoiceItem.Gender}`}
@@ -174,6 +190,7 @@ const ExploreAIVoiceItem = (props: ExploreAIVoiceItemPropsInterface) => {
 						});
 					}}
 					onEnded={audioOnEndHandler}
+					onLoadedData={()=>setIsLoading(false)}
 				/>
 			)}
 			{isSelectionRequired && (

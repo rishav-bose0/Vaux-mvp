@@ -20,7 +20,7 @@ function Project() {
   const { id } = useParams();
   const { aiVoices } = useContext(AiVoicesContext);
   const { setSelectedProject } = useContext(SelectedProjectContext);
-  const [generateVoiceBlocks, setGenerateVoiceBlocks] = useState<VAUX_GENERATE_TTS[]>([{ project_id: id ?? '', speaker_id: aiVoices[0]?.Id, text: '', language: 'en', emotion: 'neutral', duration: 0, pitch: 0, block_number: 0, speech_s3_link: '' , is_tts_generated: true}]);
+  const [generateVoiceBlocks, setGenerateVoiceBlocks] = useState<VAUX_GENERATE_TTS[]>([{ project_id: id ?? '', speaker_id: aiVoices[0]?.Id, text: '', language: 'en', emotion: 'neutral', duration: 1, pitch: 0, block_number: 0, speech_s3_link: '' , is_tts_generated: true}]);
   const [loading, setLoading] = useState(false);
   const [apiLoading, setapiLoading] = useState(false); 
   const [playAllAudioLink, setPlayAllAudioLink] = useState('');

@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import playBtn from "assets/play.svg";
-import Avatar_male_1 from "assets/M1.png";
-import Avatar_male_2 from "assets/M2.png";
+import { fetchAIVoicePreview } from "actions/APIActions";
+import Avatar_male_1 from "assets/M2.png";
+import Avatar_male_2 from "assets/M1.png";
 import Avatar_female_1 from "assets/F1.png";
 import Avatar_female_2 from "assets/F2.png";
 import pauseBtn from "assets/pause.svg";
@@ -65,18 +66,28 @@ const AIVoiceItemHome = (props: AIVoiceItemHomePropsInterface) => {
 		}
 	}, [AIVoiceItem.Id, isAudioPlaying]);
 	return (
-		<div className="flex flex-col w-[250px] justify-center items-center gap-2 relative">
-			<div
-				className=" w-[216px] h-[206px] rounded-[50%] bg-primary"
-			>
+		<div className="flex flex-col w-[250px] justify-center items-center gap-4 relative">
+			<div className="w-[216px] h-[206px]">
 				<img
 					src={imageObj[AIVoiceItem.img_id as keyof typeof imageObj]}
 					alt="AI voice Avatar"
-					className="absolute z-[1] left-[50%] top-[-70px] min-w-[250px]"
+					className="absolute left-[50%] top-[-20px] min-w-[250px] z-10 transform-translate"
 					width={260}
 					style={{ transform: "translate(-50%, 0%)" }}
 				/>
 			</div>
+
+			{/*<div*/}
+			{/*	className=" w-[216px] h-[206px] rounded-[50%] bg-primary relative"*/}
+			{/*>*/}
+			{/*	<img*/}
+			{/*		src={imageObj[AIVoiceItem.img_id as keyof typeof imageObj]}*/}
+			{/*		alt="AI voice Avatar"*/}
+			{/*		className="absolute left-[50%] top-[-70px] min-w-[250px] z-10"*/}
+			{/*		width={260}*/}
+			{/*		style={{transform: "translate(-50%, 0%)" }}*/}
+			{/*	/>*/}
+			{/*</div>*/}
 			<div className="flex gap-2 font-medium text-3xl">
 				<span>{AIVoiceItem.Name}</span>
 				<span>({AIVoiceItem.Gender})</span>
@@ -88,6 +99,7 @@ const AIVoiceItemHome = (props: AIVoiceItemHomePropsInterface) => {
 					]
 				}
 				: {Constants.COUNTRY_MAPPING[AIVoiceItem.Country as keyof typeof Constants.COUNTRY_MAPPING]}
+
 			</div>
 			<div>
 				<img

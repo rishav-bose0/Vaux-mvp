@@ -38,7 +38,7 @@ export const vauxAPI = (token:any = '') => {
           window.localStorage.removeItem('vaux-staff-token');
           window.localStorage.removeItem('userId');
           window.localStorage.removeItem('userDetails');
-          window.location.href = '/login';
+          window.location.href = '/';
         }
         return Promise.reject(response || request);
       }

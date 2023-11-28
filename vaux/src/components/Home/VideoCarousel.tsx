@@ -107,7 +107,7 @@ export default function VideoCarousel() {
                     nextButton={
                         <Button sx={{ color: '#182a75'}}
                             size="small"
-                            onClick={handleNext}
+                            onClick={() => {videoPauseHandler(); setTimeout(() => { handleNext() },0)}}
                             disabled={activeStep === maxSteps - 1}
                         >
                             Next
@@ -119,7 +119,9 @@ export default function VideoCarousel() {
                         </Button>
                     }
                     backButton={
-                        <Button sx={{ color: '#182a75'}} size="small" onClick={handleBack} disabled={activeStep === 0}>
+                        <Button sx={{ color: '#182a75'}} size="small"
+                        onClick={() => {videoPauseHandler(); setTimeout(() => { handleBack() },0)}}
+                            disabled={activeStep === 0}>
                             {theme.direction === 'rtl' ? (
                                 <KeyboardArrowRight />
                             ) : (
