@@ -12,6 +12,7 @@ export interface VAUX_AI_VOICES {
     Language: string;
     Emotion: Array<string>;
     Country: string;
+    Is_Premium: boolean;
 };
 
 

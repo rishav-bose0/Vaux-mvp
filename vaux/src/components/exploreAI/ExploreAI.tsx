@@ -85,7 +85,6 @@ const ExploreAI = (props: ExploreAIProps) => {
 		SelectCallbackFunc && SelectCallbackFunc(voice);
 	};
 	const modalCloseWrapper = () => {
-		console.log(isAudioPlaying, "dddd");
 		const audioId: HTMLAudioElement | any =
 			document.getElementById(isAudioPlaying);
 

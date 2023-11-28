@@ -121,8 +121,6 @@ function GenerateAIBlock({
             }
         }
         block["is_tts_generated"]= false;
-        console.log(block.is_tts_generated)
-        console.log(block.text)
         setGenerateBlockDetail(() => {
             return {...block};
         });

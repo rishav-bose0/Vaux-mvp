@@ -5,6 +5,7 @@ import { VAUX_AI_VOICES } from "utils/APIResponseTypes";
 import { fetchAIVoicePreview } from "actions/APIActions";
 import { Constants } from "utils/constants";
 import smallLoader from "assets/smallLoader.svg";
+import premium_icon from "assets/premium.png";
 interface ExploreAIVoiceItemPropsInterface {
 	AIVoiceItem: VAUX_AI_VOICES;
 	isAudioPlaying: string;
@@ -122,6 +123,13 @@ const ExploreAIVoiceItem = (props: ExploreAIVoiceItemPropsInterface) => {
 
 	return (
 		<div className="flex  group flex-col px-2 pt-2 pb-5 cursor-pointer  w-[150px] h-[180px] hover:shadow-lg hover:border-primary hover:border-2 justify-center items-center gap-2 relative border-[1px] border-gray-300 rounded-lg  border-solid bg-white ">
+			{
+				AIVoiceItem.Is_Premium && (
+					<div className="text-sm font-normal absolute top-1 right-1 transform rotate-[45deg]">
+						<img src={premium_icon} style={{ width: '50px', height: '50px' }} alt="Premium" />
+					</div>
+				)
+			}
 			<div className="w-[64px] h-[64px] rounded-[50%]  z-[1] relative">
 				<img
 					src={AIVoiceItem.Img_url}
