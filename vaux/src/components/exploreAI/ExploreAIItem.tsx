@@ -46,7 +46,7 @@ const ExploreAIVoiceItem = (props: ExploreAIVoiceItemPropsInterface) => {
 			setAiAudioLink(url);
 			if(ref.current){
 				ref.current.src = url;
-				fetch(url);
+				await fetch(url);
 			}
 			return
 		}else{

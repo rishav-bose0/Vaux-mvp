@@ -107,7 +107,7 @@ function GenerateAIBlock({
 		setSelectedAIVoice(result ?? aiVoices[0]);
 	}, [blockDetail]);
 
-	const updateGenerateBlockDetail = (key: string, value: string | number) => {
+	const updateGenerateBlockDetail = (key: string, value: string | number | boolean) => {
         let block = {...generateBlockDetail, [key]: value};
         if (key == "text") {
             const words = value.toString().split(/\s+/);
@@ -120,7 +120,14 @@ function GenerateAIBlock({
                 alert("Word limit per block exceeded. Please create a new block and add text");
             }
         }
-        block["is_tts_generated"]= false;
+		if (key != "is_tts_generated") {
+			block["is_tts_generated"]= false;
+		} else {
+			if (typeof value === "boolean") {
+				block["is_tts_generated"] = value;
+			}
+		}
+
         setGenerateBlockDetail(() => {
             return {...block};
         });
@@ -152,6 +159,7 @@ function GenerateAIBlock({
 			const link = await generateTTS(token, [payload]);
 			if (link) {
 				setAudioLink(link);
+				updateGenerateBlockDetail( "is_tts_generated", true)
 			}
 			setIsloading(false);
 		}
