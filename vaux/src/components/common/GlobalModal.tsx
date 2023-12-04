@@ -33,7 +33,7 @@ const GlobalModal = (props: GlobalModalProps) => {
 			aria-labelledby="transition-modal-title"
 			aria-describedby="transition-modal-description"
 			open={openState}
-			onClose={onCloseHandler}
+			// onClose={onCloseHandler}
 			closeAfterTransition
 			slots={{ backdrop: Backdrop }}
 			slotProps={{

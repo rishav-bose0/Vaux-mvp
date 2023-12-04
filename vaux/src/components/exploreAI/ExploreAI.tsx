@@ -81,7 +81,7 @@ const ExploreAI = (props: ExploreAIProps) => {
 	};
 
 	const voiceCallbackFunctionHandler = (voice: VAUX_AI_VOICES) => {
-		handleCloseModal();
+		modalCloseWrapper();
 		SelectCallbackFunc && SelectCallbackFunc(voice);
 	};
 	const modalCloseWrapper = () => {

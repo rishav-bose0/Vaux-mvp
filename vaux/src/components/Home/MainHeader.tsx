@@ -59,7 +59,7 @@ const MainHeader = () => {
 						onCloseHandler={handleCloseContactUsModal}
 						MinWidth={'400'}
 					>
-						<ContactUs />
+						<ContactUs handleCloseContactUsModal={handleCloseContactUsModal} />
 					</GlobalModal>
 
 					<li className="md:p-4 px-2 block py-3">
