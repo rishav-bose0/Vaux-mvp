@@ -200,7 +200,7 @@ function AuthHeader() {
 				MinWidth={"400"}
 				iskeepMounted={false}
 			>
-				<ContactUs />
+				<ContactUs  handleCloseContactUsModal ={handleCloseContactUsModal}/>
 			</GlobalModal>
 			)}
 		</nav>

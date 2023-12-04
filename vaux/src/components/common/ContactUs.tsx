@@ -2,7 +2,8 @@ import { List, ListItem } from "@mui/material";
 import contactUsbanner from "assets/contactUs.svg";
 import { Constants } from "utils/constants";
 
-const ContactUs = () => {
+const ContactUs = (props:any) => {
+	let {handleCloseContactUsModal} = props;
 	return (
 		<div className="grid  grid-cols-1 md:grid-cols-2 gap-4 items-center sm:text-lg 2xl:text-2xl">
 			<div>
@@ -33,6 +34,14 @@ const ContactUs = () => {
 						</p>
 					</ListItem>
 				</List>
+				<button onClick={handleCloseContactUsModal} className="absolute top-5 right-5">
+					<svg data-icon="cross" width="16" height="16" viewBox="0 0 16 16">
+						<path
+							d="M9.41 8l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 00-1.71-.71L8 6.59l-3.29-3.3a1.003 1.003 0 00-1.42 1.42L6.59 8 3.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 001.71.71L8 9.41l3.29 3.29c.18.19.43.3.71.3a1.003 1.003 0 00.71-1.71L9.41 8z"
+							fillRule="evenodd"
+						></path>
+					</svg>
+				</button>
 			</div>
 		</div>
 	);
