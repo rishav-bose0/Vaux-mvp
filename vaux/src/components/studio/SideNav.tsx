@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ExploreAI from 'components/exploreAI/ExploreAI';
 import GlobalModal from 'components/common/GlobalModal';
-import VoiceImg from 'assets/M2.png';
+import VoiceImg from 'assets/Explore-ai.png';
 import ProjectsList from 'assets/projects_list.svg';
 import { useNavigate } from 'react-router';
 

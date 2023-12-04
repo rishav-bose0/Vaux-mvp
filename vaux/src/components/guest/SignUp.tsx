@@ -77,7 +77,6 @@ function SignUpContent() {
 
     const googleLogin = useGoogleLogin({
         onSuccess: async (tokenResponse) => {
-            console.log(tokenResponse);
             handleSignup(null, true, tokenResponse?.access_token)
         },
         onError: errorResponse => console.log(errorResponse),

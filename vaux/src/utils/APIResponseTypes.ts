@@ -12,6 +12,7 @@ export interface VAUX_AI_VOICES {
     Language: string;
     Emotion: Array<string>;
     Country: string;
+    Is_Premium: boolean;
 };
 
 
@@ -57,4 +58,5 @@ export interface VAUX_GENERATE_TTS {
     pitch: number;
     block_number: number;
     speech_s3_link: string;
+    is_tts_generated: boolean
 }

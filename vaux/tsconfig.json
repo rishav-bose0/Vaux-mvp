@@ -20,6 +20,8 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": "src",
+    "outDir": "build", // Types should go into this directory.
+    "declaration": true // Generate d.ts files
   },
   "include": [
     "src"

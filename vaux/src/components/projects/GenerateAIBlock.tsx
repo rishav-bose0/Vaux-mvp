@@ -103,20 +103,29 @@ function GenerateAIBlock({
 
 	useEffect(() => {
 		setGenerateBlockDetail(blockDetail);
-		if (blockDetail.speech_s3_link.length > 0) {
-			setAudioLink(blockDetail.speech_s3_link);
-		}
 		const result = aiVoices.find((item) => item.Id === blockDetail.speaker_id);
 		setSelectedAIVoice(result ?? aiVoices[0]);
 	}, [blockDetail]);
 
 	const updateGenerateBlockDetail = (key: string, value: string | number) => {
-		const block = { ...generateBlockDetail, [key]: value };
-		setGenerateBlockDetail(() => {
-			return { ...block };
-		});
-		updateBlockDetail({ ...block });
-	};
+        let block = {...generateBlockDetail, [key]: value};
+        if (key == "text") {
+            const words = value.toString().split(/\s+/);
+            const wordCount = words.length
+
+            if (wordCount > 50) {
+                const truncatedText = words.slice(0, 50).join(' '); // Limiting to 100 words
+                block = {...generateBlockDetail, [key]: truncatedText};
+                // Show a popup message
+                alert("Word limit per block exceeded. Please create a new block and add text");
+            }
+        }
+        block["is_tts_generated"]= false;
+        setGenerateBlockDetail(() => {
+            return {...block};
+        });
+        updateBlockDetail({...block});
+    };
 
 	const [openExploreAIsModal, setOpenExploreAIsModal] = useState(false);
 	const handleOpenExploreAIsModal = () => setOpenExploreAIsModal(true);
@@ -138,6 +147,7 @@ function GenerateAIBlock({
 				duration: generateBlockDetail.duration,
 				block_number: generateBlockDetail.block_number,
 				pitch: generateBlockDetail.pitch,
+                is_tts_generated: generateBlockDetail.is_tts_generated,
 			};
 			const link = await generateTTS(token, [payload]);
 			if (link) {
@@ -195,37 +205,38 @@ function GenerateAIBlock({
 										}
 									</Select>
 								</div>
-								<ClickAwayListener onClickAway={() => setOpenPitch(false)}>
-									<div className="relative">
-										<div
-											className="flex rounded-3xl font-medium border border-gray-300 justify-center items-center px-2 py-1 text-xs cursor-pointer"
-											onClick={() => {
-												setOpenSpeed(false);
-												setOpenPitch(!openPitch);
-											}}
-										>
-											<span>{`Pitch`}</span>
-											<DownArrow className="fill-primary mx-1" />
-										</div>
-										{openPitch && (
-											<>
-												<div className="absolute top-[110%] left-[40%] w-[0px] h-[0px] border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[12px]"></div>
-												<SliderDropdown positionStyles={`top-[145%] left-[-174%]`} sliderValue={generateBlockDetail.pitch} stepValue={1}
-													sliderChanged={(value) => updateGenerateBlockDetail("pitch", value)} defaultValue={0} min={-50} max={50} sliderOptions={pitchSliderOptions} />
-											</>
-										)}
-									</div>
-								</ClickAwayListener>
+								{/*<ClickAwayListener onClickAway={() => setOpenPitch(false)}>*/}
+								{/*	<div className="relative">*/}
+								{/*		<div*/}
+								{/*			className="flex rounded-3xl font-medium border border-gray-300 justify-center items-center px-2 py-1 text-xs cursor-pointer"*/}
+								{/*			onClick={() => {*/}
+								{/*				setOpenSpeed(false);*/}
+								{/*				setOpenPitch(!openPitch);*/}
+								{/*			}}*/}
+								{/*		>*/}
+								{/*			<span>{`Pitch`}</span>*/}
+								{/*			<DownArrow className="fill-primary mx-1" />*/}
+								{/*		</div>*/}
+								{/*		{openPitch && (*/}
+								{/*			<>*/}
+								{/*				<div className="absolute top-[110%] left-[40%] w-[0px] h-[0px] border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[12px]"></div>*/}
+								{/*				<SliderDropdown positionStyles={`top-[145%] left-[-174%]`} sliderValue={generateBlockDetail.pitch} stepValue={1}*/}
+								{/*					sliderChanged={(value) => updateGenerateBlockDetail("pitch", value)} defaultValue={0} min={-50} max={50} sliderOptions={pitchSliderOptions} />*/}
+								{/*			</>*/}
+								{/*		)}*/}
+								{/*	</div>*/}
+								{/*</ClickAwayListener>*/}
 								<ClickAwayListener onClickAway={() => setOpenSpeed(false)}>
 									<div className="relative">
 										<div
-											className="flex rounded-3xl font-medium border border-gray-300 justify-center items-center px-2 py-1 text-xs cursor-pointer"
+											className="flex rounded-3xl font-medium border border-gray-300 justify-center items-center px-2 py-1 text-xs cursor-pointer h-[33px]"
 											onClick={() => {
 												setOpenPitch(false);
 												setOpenSpeed(!openSpeed);
 											}}
 										>
-											<span>{`Duration`}</span>
+											<span style={{
+												padding: ' 0 0.2rem 0rem 0.5rem' }}>{`Duration`}</span>
 											<DownArrow className="fill-primary mx-1" />
 										</div>
 										{openSpeed && (
@@ -292,6 +303,17 @@ function GenerateAIBlock({
 									controls
 									controlsList={"nofullscreen nodownload "}
 									src={AudioLink}
+									ref={ttsAudioRef}
+								/>
+							</div>
+						)}
+						{!AudioLink && generateBlockDetail.speech_s3_link?.length > 0 &&(
+							<div className="mt-3 w-full ">
+								<audio
+									className="w-full h-[32px]"
+									controls
+									controlsList={"nofullscreen nodownload "}
+									src={generateBlockDetail.speech_s3_link}
 									ref={ttsAudioRef}
 								/>
 							</div>

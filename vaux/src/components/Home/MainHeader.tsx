@@ -4,7 +4,7 @@ import { Constants } from "utils/constants";
 import GlobalModal from "components/common/GlobalModal";
 import ContactUs from "components/common/ContactUs";
 import { useNavigate } from "react-router";
-import LOGO from "assets/logo.jpeg";
+import LOGO from "assets/voaux-logo.png";
 
 const MainHeader = () => {
 	const [showMenu, setShowMenu] = useState(false);
@@ -19,17 +19,17 @@ const MainHeader = () => {
 
 	return (
 		<nav className="sticky top-0 flex flex-wrap items-center justify-between z-20 w-full py-4 md:py-0 px-8 border-b border-gray-600 bg-primary text-white">
-			<div>
+			<div className="flex bg-primary w-[110px] h-[67px] items-center justify-center">
 				<a href="/#">
 					<div className="flex">
 						<img
 							src={LOGO}
-							className="h-8 mr-3"
+							className="h-[120px] mr-2"
 							alt="VOAUX Logo"
 						/>
-						<span className="self-center text-2xl font-semibold whitespace-nowrap">
-							VOAUX
-						</span>
+						{/*<span className="self-center text-2xl font-semibold whitespace-nowrap">*/}
+						{/*	VOAUX*/}
+						{/*</span>*/}
 					</div>
 				</a>
 			</div>
