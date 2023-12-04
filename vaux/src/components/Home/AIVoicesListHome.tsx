@@ -9,7 +9,7 @@ const AIVoicesListHome = () => {
 
 	useEffect(() => {
 		const getAllAIVoices = async () => {
-			const voices = await getAllAIVoiceSample("",true);
+			const voices = await getAllAIVoiceSample("","",true);
 			if (voices?.length) {
 				const formatedVoices = formatAIVoicesResponseForLanding(voices, 2, 2);
 				setAIVoices(formatedVoices);

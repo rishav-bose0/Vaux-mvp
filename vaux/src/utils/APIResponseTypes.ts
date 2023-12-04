@@ -61,3 +61,8 @@ export interface VAUX_GENERATE_TTS {
     speech_s3_link: string;
     is_tts_generated: boolean
 }
+
+export interface VAUX_CLONE_VOICE_RESPONSE {
+    voice_clone_success: boolean;
+    message: string;
+}
