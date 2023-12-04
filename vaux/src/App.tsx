@@ -6,6 +6,7 @@ import SignUp from 'components/guest/SignUp';
 import Studio from 'components/studio/Studio';
 import ProjectList from 'components/studio/ProjectsList';
 import Project from 'components/studio/Project';
+import Clone from 'components/studio/Clone';
 import { GuestRoute } from 'components/routeGuard/GuestRoute';
 import './App.css';
 
@@ -34,6 +35,10 @@ function App() {
         {
           path: 'projects',
           element: <ProtectedRoute><ProjectList /></ProtectedRoute>
+        },
+        {
+          path: 'clone',
+          element: <ProtectedRoute><Clone /></ProtectedRoute>
         },
         {
           path: 'projects/:id',

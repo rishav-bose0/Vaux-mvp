@@ -29,6 +29,8 @@ const ExploreAI = (props: ExploreAIProps) => {
 		"vaux-staff-token",
 		JSON.stringify(null),
 	);
+	const [userId] = useLocalStorage("userId", JSON.stringify(null));
+
 	const { addAiVoice } = useContext(AiVoicesContext);
 	const isVisible = usePageVisibility();
 
@@ -48,7 +50,7 @@ const ExploreAI = (props: ExploreAIProps) => {
 
 	useEffect(() => {
 		const getAllAIVoices = async () => {
-			const voices = await getAllAIVoiceSample(token, false);
+			const voices = await getAllAIVoiceSample(userId, token, false);
 			// const voices = List_all_voicesMockData;
 			if (voices && voices.length) {
 				setAIVoices(voices);
