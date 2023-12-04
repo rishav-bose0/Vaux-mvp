@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import playBtn from "assets/play.svg";
 import { fetchAIVoicePreview } from "actions/APIActions";
-import Avatar_male_1 from "assets/M2.png";
-import Avatar_male_2 from "assets/M1.png";
+import Avatar_male_1 from "assets/M1.png";
+import Avatar_male_2 from "assets/M2.png";
 import Avatar_female_1 from "assets/F1.png";
 import Avatar_female_2 from "assets/F2.png";
 import pauseBtn from "assets/pause.svg";
