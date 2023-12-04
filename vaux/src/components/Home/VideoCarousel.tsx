@@ -12,11 +12,11 @@ import loadingGIF from "assets/smallLoader.svg";
 const steps = [
     {
         label: 'VOAUX Sample 1',
-        src: 'https://voaux.s3.ap-south-1.amazonaws.com/promo_videos/merc_voice_over_2.mp4',
+        src: 'https://voaux.s3.ap-south-1.amazonaws.com/promo_videos/merc_voice_over_2_dup.mp4',
     },
     {
         label: 'VOAUX Sample 2',
-        src: 'https://voaux.s3.ap-south-1.amazonaws.com/promo_videos/summit_voice_over.mp4',
+        src: 'https://voaux.s3.ap-south-1.amazonaws.com/promo_videos/summit_voice_over_dup.mp4',
     },
 ];
 

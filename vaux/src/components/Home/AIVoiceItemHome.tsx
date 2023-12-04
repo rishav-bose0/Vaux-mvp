@@ -17,6 +17,7 @@ interface AIVoiceItemHomePropsInterface {
 		Language: string;
 		Emotion: Array<string>;
 		Country: string;
+		Preview_link: string
 	};
 	isAudioPlaying: number;
 	setIsAudioPlaying: React.Dispatch<React.SetStateAction<number>>;
@@ -39,27 +40,20 @@ const AIVoiceItemHome = (props: AIVoiceItemHomePropsInterface) => {
 		F1: Avatar_female_1,
 		F2: Avatar_female_2,
 	};
-	const fetchAIVoiceAudioLink = async (VoiceId: number, name: string) => {
-		// const url = await fetchAIVoicePreview(VoiceId, name);
-		const url = await fetchAIVoicePreview(VoiceId, name);
-		if (url) {
-			setAiAudioLink(url);
-		}
-	};
 
-	const audioPlayHandler = async () => {
+	const audioPlayHandler = () => {
 		setIsAudioPlaying(AIVoiceItem.Id);
 		ref.current?.play();
 		if (!AIAudioLink?.length) {
-			await fetchAIVoiceAudioLink(AIVoiceItem.Id, AIVoiceItem.Name);
+			setAiAudioLink(AIVoiceItem.Preview_link);
 		}
 	};
 	const audioPauseHandler = () => {
 		ref.current?.pause();
 	};
 	useEffect(() => {
-		const fetchAIVoiceAudioLink = async () => {
-			const url = await fetchAIVoicePreview(AIVoiceItem.Id, AIVoiceItem.Name);
+		const fetchAIVoiceAudioLink = () => {
+			const url = AIVoiceItem.Preview_link
 			if (url) {
 				setAiAudioLink(url);
 			}

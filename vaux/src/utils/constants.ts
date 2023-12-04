@@ -36,8 +36,8 @@ export const Constants = {
 		"us": "USA"
 	},
 	CONTACT_US_EMAIL:{
-		SUPPORT:"xyz@mail.com",
-		PRODUCT_SUPPORT:"xyz@mail.com",
+		SUPPORT:"support@voaux.com",
+		PRODUCT_SUPPORT:"support@voaux.com",
 	}
 }
 
