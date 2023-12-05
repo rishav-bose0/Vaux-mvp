@@ -1,18 +1,23 @@
 {
   "files": {
-    "main.css": "/static/css/main.66957370.css",
-    "main.js": "/static/js/main.f1cb2688.js",
+    "main.css": "/static/css/main.c8b36447.css",
+    "main.js": "/static/js/main.42758aab.js",
     "static/js/787.9b48e3b7.chunk.js": "/static/js/787.9b48e3b7.chunk.js",
     "static/media/F2.png": "/static/media/F2.42c895aaf1127a88573e.png",
+    "static/media/first_step.png": "/static/media/first_step.3d9fe300f05de4aa7586.png",
     "static/media/M2.png": "/static/media/M2.a1166a0a08e6d6376309.png",
+    "static/media/second_step.png": "/static/media/second_step.bde2bee4b8b65ab996a8.png",
+    "static/media/cloned_voice.png": "/static/media/cloned_voice.9999f99ffb4bc8c8f16e.png",
     "static/media/M1.png": "/static/media/M1.892c77881d1fe4741ace.png",
+    "static/media/third_step.png": "/static/media/third_step.44586c40a8a2c0e696e8.png",
     "static/media/F1.png": "/static/media/F1.33bf8a884a1b723ca965.png",
     "static/media/voaux-profile-logo.png": "/static/media/voaux-profile-logo.9726ea3d8cc96e95f7c8.png",
+    "static/media/clone_voice_main.png": "/static/media/clone_voice_main.860ce738b5c4fa95cb52.png",
     "static/media/voaux-logo.png": "/static/media/voaux-logo.2badf4c4aece4ccd056a.png",
     "static/media/Explore-ai.png": "/static/media/Explore-ai.efc9ca7799d384d28990.png",
     "static/media/main.svg": "/static/media/main.efb2167efc301621b4ae01c6904ef92a.svg",
-    "static/media/premium.png": "/static/media/premium.4c7d87699117eb104f42.png",
     "static/media/signup.svg": "/static/media/signup.c0164a26364878bfcc5ad53e9d26217a.svg",
+    "static/media/premium_2.png": "/static/media/premium_2.6081bee0e19e638a7276.png",
     "static/media/signin.svg": "/static/media/signin.a46767ff42b572a57b96d0d3bcec5d0e.svg",
     "static/media/contactUs.svg": "/static/media/contactUs.94e6bca358f33ad5aadbd691307e54ab.svg",
     "static/media/project_folder.svg": "/static/media/project_folder.8b18d04c08f83161e88b39a4e78a1947.svg",
@@ -26,14 +31,13 @@
     "static/media/pause.svg": "/static/media/pause.4791695b861e072fd4b2f33d00b6fde3.svg",
     "static/media/projects_list.svg": "/static/media/projects_list.1796a8a618003f4bf2d31604cbea9ed3.svg",
     "static/media/play.svg": "/static/media/play.380fce0eebcd537c0ac4a6edab160d7f.svg",
-    "static/media/up_arrow.svg": "/static/media/up_arrow.11b73b942d56b3730b783b2ef045269a.svg",
     "static/media/dropdown_arrow.svg": "/static/media/dropdown_arrow.86cc01ae4d95d06293368248f2a0b5c0.svg",
-    "main.66957370.css.map": "/static/css/main.66957370.css.map",
-    "main.f1cb2688.js.map": "/static/js/main.f1cb2688.js.map",
+    "main.c8b36447.css.map": "/static/css/main.c8b36447.css.map",
+    "main.42758aab.js.map": "/static/js/main.42758aab.js.map",
     "787.9b48e3b7.chunk.js.map": "/static/js/787.9b48e3b7.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.66957370.css",
-    "static/js/main.f1cb2688.js"
+    "static/css/main.c8b36447.css",
+    "static/js/main.42758aab.js"
   ]
 }
