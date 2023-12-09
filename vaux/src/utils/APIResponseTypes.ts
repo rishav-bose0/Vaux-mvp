@@ -13,7 +13,7 @@ export interface VAUX_AI_VOICES {
     Emotion: Array<string>;
     Country: string;
     Preview_link:string
-    Is_Premium: boolean;
+    Type: string;
 };
 
 

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { VAUX_GENERATE_TTS } from 'utils/APIResponseTypes';
 import GenerateAIBlock from 'components/projects/GenerateAIBlock';
 import { ReactComponent as AddCircle } from 'assets/add_circle.svg';
@@ -13,7 +13,6 @@ import { SelectedProjectContext } from 'context/SelectedProjectContext';
 import Loader from 'components/common/Loader';
 
 
-
 function Project() {
 
   const [token, setToken] = useLocalStorage("vaux-staff-token", JSON.stringify(null));
@@ -24,6 +23,7 @@ function Project() {
   const [loading, setLoading] = useState(false);
   const [apiLoading, setapiLoading] = useState(false); 
   const [playAllAudioLink, setPlayAllAudioLink] = useState('');
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const addBlockHandler = () => {
     if (id && aiVoices?.length > 0) {
@@ -70,14 +70,33 @@ function Project() {
       const link = await generateTTS(token, generateVoiceBlocks);
       if (link) {
         setPlayAllAudioLink(link);
+        for (let i = 0; i < generateVoiceBlocks.length; i++) {
+          generateVoiceBlocks[i].is_tts_generated = true;
+          updateGenerateBlockHandler(generateVoiceBlocks[i]);
+        }
       }
       setLoading(false);
     }
   }
 
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
   return (
     <>
       {apiLoading && <Loader />}
+      <div className='dropdown-wrapper w-[135px]' onMouseEnter={toggleDropdown} onMouseLeave={toggleDropdown}>
+        <span className='p-2 rounded-xl border-4 border-blue-900 dropdown-header text-red-900 hover:bg-gray-200'>Points to Note</span>
+        {showDropdown && (
+            <div className='p-2 flex flex-col dropdown-content w-[800px]'>
+              <span className='text-xl md:text-xl font-normal font-ink-free mb-6'>1. Duration is available only for standard voices.</span>
+              <span className='text-xl md:text-xl font-normal font-ink-free mb-6'>2. Premium voices are more lifelike and different tones can be generated using prompt engineering.</span>
+              <span className='text-xl md:text-xl font-normal font-ink-free mb-6'>3. [Applicable for premium and cloned voice] For the generation of a different tone, users can use prompts enclosed in []. For example, [Excited voice] I am going to the market.</span>
+              <span className='text-xl md:text-xl font-normal font-ink-free mb-6'>4. Incase of muffled/garbage audio, try to play again .</span>
+            </div>
+        )}
+      </div>
       {!apiLoading && <div className='mx-auto w-[70%]'>
         { generateVoiceBlocks.length > 0 &&
           generateVoiceBlocks.map((item, index) => {

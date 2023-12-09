@@ -8,6 +8,7 @@ import LOGO from "assets/voaux-logo.png";
 
 const MainHeader = () => {
 	const [showMenu, setShowMenu] = useState(false);
+	const [showProductsDropdown, setShowProductsDropdown] = useState(false);
 	const [openContactUsModal, setOpenContactUsModal] = useState(false);
 	const handleOpenContactUsModal = () => setOpenContactUsModal(true);
 	const handleCloseContactUsModal = () => setOpenContactUsModal(false);
@@ -27,29 +28,42 @@ const MainHeader = () => {
 							className="h-[120px] mr-2"
 							alt="VOAUX Logo"
 						/>
-						{/*<span className="self-center text-2xl font-semibold whitespace-nowrap">*/}
-						{/*	VOAUX*/}
-						{/*</span>*/}
 					</div>
 				</a>
 			</div>
-			<div className="cursor-pointer md:hidden block" onClick={() => setShowMenu(!showMenu)}>
+			<div
+				className="cursor-pointer md:hidden block"
+				onClick={() => setShowMenu(!showMenu)}
+			>
 				<svg xmlns="http://www.w3.org/2000/svg" id="menu-button" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 					<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
 				</svg>
 			</div>
-			<div className={`${!showMenu ? 'hidden' : ''} w-full md:flex md:items-center md:w-auto`} id="menu">
+			<div
+				className={`${!showMenu ? 'hidden' : ''} w-full md:flex md:items-center md:w-auto`}
+				id="menu"
+			>
 				<ul className="pt-4 text-base text-white md:flex md:items-center md:justify-between md:pt-0 ">
-					<li className="cursor-pointer px-4 py-4 block group">
-						<OptionsDropdown options_classes='absolute top-[42px] right-0 p-2 block max-h-[60vh] min-h-[50px] shadow-md bg-white block'
-							DD_data={Constants.optionDropdownDataProducts} DD_Item_classes='text-[14px] px-2 text-primary' itemTextColor='text-primary'
-							arrowStyles={`top-[-20%] right-[10px]`}>
-							<div className={`text-0 flex items-center text-white font-medium group-hover:font-bold gap-1`}>
-								{'Products'}
-								{/* {!optionDropdownOpen && <img src={downArrow} alt="down-arrow" />}
-								{optionDropdownOpen && <img src={upArrow} alt="down-arrow" />} */}
-							</div>
-						</OptionsDropdown>
+					{/* Products Dropdown */}
+					<li
+						className="cursor-pointer px-4 py-4 block group relative"
+						onMouseEnter={() => setShowProductsDropdown(true)}
+						onMouseLeave={() => setShowProductsDropdown(false)}
+					>
+						<div className={`text-0 flex items-center text-white font-medium group-hover:font-bold gap-1`}>
+							{'Products'}
+							{showProductsDropdown && (
+								<div className="absolute top-[42px] right-0 w-[200px] p-2 max-h-[60vh] min-h-[50px] shadow-md bg-white">
+									{/* Dropdown content */}
+									{Constants.optionDropdownDataProducts.map((item, index) => (
+										<div key={index} className="text-[14px] px-2 text-primary p-4 hover:text-blue-500 hover:bg-gray-200 transition-all">
+											{/* Render your dropdown content here */}
+											<a href={item.link}> {item.label} </a>
+										</div>
+									))}
+								</div>
+							)}
+						</div>
 					</li>
 					<li className="cursor-pointer px-4 py-4 block font-medium hover:font-bold" onClick={handleOpenContactUsModal}>
 						Contact Us

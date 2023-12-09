@@ -13,8 +13,8 @@ export const Constants = {
 				description: 'With VOAUX, you have access to an extensive library of AI voices, both male and female, ready to bring your scripts to life. Our voices are versatile and suited for various use cases, including sales, advertisements, animations, e-learning videos, corporate presentations, training materials, and more.'
 			},
 			{
-				key: 2, img: 'dynamic_assets/introduce_2.png', title: 'Unleash Creativity', scale: 'scale-100',
-				description: 'VOAUX isn\'t just about making voiceovers; it\'s about unleashing creativity. You can script, customize, and fine-tune every voiceover to match your vision. Need custom pauses or pronunciations? No problem. Our intuitive tools and features make the process a breeze.'
+				key: 2, img: 'dynamic_assets/introduce_2.png', title: 'Prompt engineering', scale: 'scale-100',
+				description: 'VOAUX isn\'t just about making voiceovers; it\'s about unleashing creativity. You can script, customize, and fine-tune every voiceover to match your vision. You can add prompts like [Excited Voice] , [Sad Voice] to generate different tone of the voice'
 			}, {
 				key: 3, img: 'dynamic_assets/introduce_3.png', title: 'Quality and Realism', scale: 'scale-80',
 				description: 'Our AI voices are engineered for exceptional quality and realism. You\'ll be amazed at how human-like they sound. We understand the importance of conveying emotions and delivering your message with precision'
@@ -24,6 +24,7 @@ export const Constants = {
 	},
 	optionDropdownDataProducts: [
 		{ label: "Text to Speech", link: "/signup" },
+		{ label: "Voice Cloning", link: "/signup" },
 	],
 	optionDropdownDataProfile: [
 		{ label: "My Account", link: "/user-profile" },

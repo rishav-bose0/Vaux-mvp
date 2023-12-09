@@ -91,7 +91,7 @@ const Clone = () => {
                 <span className='text-xl md:text-xl font-normal font-ink-free mb-6'>{"1. Avoid clips with background music, noise or reverb."}</span>
                 <span className='text-xl md:text-xl font-normal font-ink-free mb-6'>{"2. Try to find clips that are spoken in such a way as you wish your output to sound like."}</span>
                 <span className='text-xl md:text-xl font-normal font-ink-free mb-6'>{"3. Clips duration should be somewhere between 7-15secs. Adding more number of clips leads to better cloning. (ideal quantity >= 15 clips)"}</span>
-                <span className='text-xl md:text-xl font-normal font-ink-free mb-6'>{"4. Save the clips as a WAV format and 22050 as sample rate."}</span>
+                <span className='text-xl md:text-xl font-normal font-ink-free mb-6'>{"4. Media file used should be of WAV file format."}</span>
                 <span className='text-xl md:text-xl font-normal font-ink-free mb-6'>{"5. Cloning Process may take 3-4 minutes."}</span>
             </div>
             {filesError && <p className="text-red-500">{filesError}</p>}

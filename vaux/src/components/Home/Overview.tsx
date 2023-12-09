@@ -1,6 +1,9 @@
 import AIVoicesListHome from 'components/Home/AIVoicesListHome';
 import { Constants } from 'utils/constants';
 import mainImage from 'assets/main.svg';
+import first_step_image from 'assets/first_step.png';
+import second_step_image from 'assets/second_step.png';
+import third_step_image from 'assets/third_step.png';
 import voiceAi from 'assets/voice_ai.svg';
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
@@ -128,7 +131,7 @@ function Overview() {
         </div>
       </div> */}
 
-      <div className='vaux-narrate'>
+      <div className='vaux-narrate '>
         <h1 className='text-2xl md:text-4xl font-bold mb-10'>Discover Voice Narrations Crafted by the VOAUX AI Voice Generator</h1>
         <span className='text-[1rem] md:text-xl font-normal'>"Below, you'll find compelling instances of authentic voiceovers, all shaped by the remarkable AI voices of VOAUX."</span>
         <div className='md:flex mt-10 mb-4 gap-6'>
@@ -136,13 +139,84 @@ function Overview() {
             <h1 className='text-2xl md:text-4xl font-semibold my-6'>Marketing</h1>
             <span className='block md:w-[60%] lg:w-[50%]'>Expand your storytelling reach and global content accessibility by entrusting VOAUX to generate engaging, lifelike voiceovers for your documentary films, available in multiple languages</span>
           </div>
-          <div className='md:w-2/3 m-auto group relative'>
+          <div className='md:w-2/3 m-auto group rounded-[25px] bg-light-white relative'>
             <VideoCarousel />
           </div>
         </div>
       </div>
 
+      <div className='vaux-narrate border border-solid border-light-white rounded-[25px] p-12' style={{ backgroundColor: '#E6E6FA'}}>
+        <h2 className='text-2xl md:text-4xl font-bold mb-10'> Voice Cloning </h2>
+        <p className='text-2xl md:text-xl mb-10'>
+          Voice cloning is an advanced technology that replicates a person's voice, enabling the creation of highly realistic speech that mimics the unique characteristics, tone, and inflections of an individual's voice. It's achieved through sophisticated machine learning algorithms and neural networks that analyze and synthesize the voice patterns, intonations, and speech nuances from a sample audio dataset.
+        </p>
+        <p className='text-2xl md:text-xl mb-10'>
+           Users can now experience personalized interactions, obtain tailored voice-related services, or explore creative applications in media and entertainment. It empowers users to create custom synthetic voices that suit their specific needs and preferences.
+        </p>
+        <p className='text-2xl md:text-xl font-bold mb-10'>
+          Voice Cloning made simple in 2 easy steps:
+        </p>
+        {/*<div className="flex flex-col">*/}
+        {/*  */}
+        {/*</div>*/}
+        <div className='md:flex mt-10 mb-4 gap-6'>
+          <div className='md:w-4/6 my-6'>
+            <img
+                src={first_step_image}
+                // alt="AI voice Avatar"
+                // className="absolute left-[50%] top-[-20px] min-w-[250px] z-10 transform-translate"
+                // width={260}
+                // style={{ transform: "translate(50%, 0%)" }}
+            />
+            {/*<span className='block md:w-[60%] lg:w-[50%]'>Expand your storytelling reach and global content accessibility by entrusting VOAUX to generate engaging, lifelike voiceovers for your documentary films, available in multiple languages</span>*/}
+          </div>
+          <div className='md:w-2/6 m-auto group rounded-[25px] relative'>
+            <p className='text-xl md:text-3xl font-normal font-ink-free mb-6'>
+              * Upload the voice that you would want to clone.
+            </p>
+          </div>
+        </div>
+
+        <div className='md:flex mt-10 mb-4 gap-6'>
+          <div className='md:w-2/6 my-6'>
+            <p className='text-xl md:text-3xl font-normal font-ink-free mb-6'>
+              * Add Details like clone name and gender of the clone voice.
+            </p>
+            {/*<span className='block md:w-[60%] lg:w-[50%]'>Expand your storytelling reach and global content accessibility by entrusting VOAUX to generate engaging, lifelike voiceovers for your documentary films, available in multiple languages</span>*/}
+          </div>
+          <div className='md:w-4/6 m-auto group rounded-[25px] relative'>
+            <img
+                src={second_step_image}
+                // alt="AI voice Avatar"
+                // className="absolute left-[50%] top-[-20px] min-w-[250px] z-10 transform-translate"
+                // width={260}
+                // style={{ transform: "translate(50%, 0%)" }}
+            />
+          </div>
+        </div>
+
+        <div className='md:flex mt-10 mb-4 gap-6'>
+          <div className='md:w-4/6 my-6'>
+            <img
+                src={third_step_image}
+                // alt="AI voice Avatar"
+                // className="absolute left-[50%] top-[-20px] min-w-[250px] z-10 transform-translate"
+                // width={260}
+                // style={{ transform: "translate(50%, 0%)" }}
+            />
+            {/*<span className='block md:w-[60%] lg:w-[50%]'>Expand your storytelling reach and global content accessibility by entrusting VOAUX to generate engaging, lifelike voiceovers for your documentary films, available in multiple languages</span>*/}
+          </div>
+          <div className='md:w-2/6 m-auto group rounded-[25px] relative'>
+            <p className='text-xl md:text-3xl font-normal font-ink-free mb-6'>
+              Voila! Your Cloned voice is ready for use in a couple of minutes
+            </p>
+          </div>
+        </div>
+      </div>
+
     </div>
+
+
   )
 }
 

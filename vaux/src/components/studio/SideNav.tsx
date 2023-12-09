@@ -2,6 +2,7 @@ import { useState } from 'react';
 import ExploreAI from 'components/exploreAI/ExploreAI';
 import GlobalModal from 'components/common/GlobalModal';
 import VoiceImg from 'assets/Explore-ai.png';
+import VoiceClone from 'assets/clone_voice_main.png';
 import ProjectsList from 'assets/projects_list.svg';
 import { useNavigate } from 'react-router';
 
@@ -35,7 +36,7 @@ function SideNav() {
         </div>
         <div className='side-badge m-2 group' onClick={() => routeChange('/studio/clone')}>
           <div className="flex flex-col items-center py-2 px-[0.2rem] cursor-pointer group-hover:bg-light-grey group-hover:rounded-[10px]">
-            <img src={ProjectsList} alt="voice" width={40} height={40} className='bg-primary rounded-circle my-1 p-1' />
+            <img src={VoiceClone} alt="voice" width={40} height={40} className='bg-primary rounded-circle my-1 p-1' />
             <div className='text-xs font-semibold text-black-second text-center'>{'Clone Voice'}</div>
           </div>
         </div>
