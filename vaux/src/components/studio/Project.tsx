@@ -24,11 +24,12 @@ function Project() {
   const [apiLoading, setapiLoading] = useState(false); 
   const [playAllAudioLink, setPlayAllAudioLink] = useState('');
   const [showDropdown, setShowDropdown] = useState(false);
+  const [lastUsedVoiceId, setLastUsedVoiceId] = useState<number>(aiVoices[0]?.Id);
 
   const addBlockHandler = () => {
     if (id && aiVoices?.length > 0) {
       setGenerateVoiceBlocks((prev: VAUX_GENERATE_TTS[]) => {
-        return [...prev, { project_id: id, speaker_id: aiVoices[0]?.Id, text: '', language: 'en', emotion: 'neutral', duration: 1, pitch: 0, block_number: generateVoiceBlocks.length , speech_s3_link: '', is_tts_generated:true}];
+        return [...prev, { project_id: id, speaker_id: lastUsedVoiceId, text: '', language: 'en', emotion: 'neutral', duration: 1, pitch: 0, block_number: generateVoiceBlocks.length , speech_s3_link: '', is_tts_generated:true}];
       });
     }
   }
@@ -42,6 +43,7 @@ function Project() {
         if (result.length > 0) {
           const list: VAUX_GENERATE_TTS[] = [];
           result.forEach((item: any, index: number) => {
+            setLastUsedVoiceId(item.speaker_details?.id)
             list.push({ ...item.tts_details, project_id: id, language: 'en', speaker_id: item.speaker_details?.id, block_number: index, is_tts_generated: true });
           });
           setGenerateVoiceBlocks([...list]);
@@ -60,6 +62,7 @@ function Project() {
     setGenerateVoiceBlocks((prev: VAUX_GENERATE_TTS[]) => {
       let list = [...prev];
       list = list.map(element => element.block_number === item.block_number ? item : element);
+      setLastUsedVoiceId(item.speaker_id)
       return [...list];
     });
   }
