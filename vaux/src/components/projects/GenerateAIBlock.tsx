@@ -59,20 +59,24 @@ function GenerateAIBlock({
 			label: '1',
 		},
 		{
+			value: 1.25,
+			label: '1.25',
+		},
+		{
 			value: 1.5,
 			label: '1.5',
+		},
+		{
+			value: 1.75,
+			label: '1.75',
 		},
 		{
 			value: 2,
 			label: '2',
 		},
 		{
-			value: 2.5,
-			label: '2.5',
-		},
-		{
-			value: 3,
-			label: '3',
+			value: 2.25,
+			label: '2.25',
 		}
 	];
 
@@ -112,9 +116,13 @@ function GenerateAIBlock({
         if (key == "text") {
             const words = value.toString().split(/\s+/);
             const wordCount = words.length
+			let maxWordCount = 200
+			if (selectedAIVoice.Type !== "standard"){
+				maxWordCount = 70
+			}
 
-            if (wordCount > 50) {
-                const truncatedText = words.slice(0, 50).join(' '); // Limiting to 100 words
+            if (wordCount > maxWordCount) {
+                const truncatedText = words.slice(0, maxWordCount).join(' '); // Limiting to 100 words
                 block = {...generateBlockDetail, [key]: truncatedText};
                 // Show a popup message
                 alert("Word limit per block exceeded. Please create a new block and add text");
@@ -154,8 +162,9 @@ function GenerateAIBlock({
 				duration: generateBlockDetail.duration,
 				block_number: generateBlockDetail.block_number,
 				pitch: generateBlockDetail.pitch,
-                is_tts_generated: generateBlockDetail.is_tts_generated,
+                // is_tts_generated: generateBlockDetail.is_tts_generated,
 			};
+
 			const link = await generateTTS(token, [payload]);
 			if (link) {
 				setAudioLink(link);
@@ -204,7 +213,13 @@ function GenerateAIBlock({
 								</div>
 								<div
 									className="flex rounded-3xl font-medium border border-gray-300 justify-center items-center px-2 py-1 text-xs cursor-pointer">
-									<Select className="generate-block-select" sx={selectStyles} defaultValue="Neutral" value={generateBlockDetail.emotion} onChange={(event) => updateGenerateBlockDetail('emotion', event.target.value)}>
+									<Select
+										className="generate-block-select"
+										sx={selectStyles}
+										defaultValue="Neutral"
+										value={generateBlockDetail.emotion}
+										onChange={(event) => updateGenerateBlockDetail('emotion', event.target.value)}
+										disabled={selectedAIVoice?.Type != 'standard'}>
 										{
 											selectedAIVoice && selectedAIVoice?.Emotion.length > 0 &&
 											selectedAIVoice.Emotion.map(emotion => {
@@ -213,35 +228,18 @@ function GenerateAIBlock({
 										}
 									</Select>
 								</div>
-								{/*<ClickAwayListener onClickAway={() => setOpenPitch(false)}>*/}
-								{/*	<div className="relative">*/}
-								{/*		<div*/}
-								{/*			className="flex rounded-3xl font-medium border border-gray-300 justify-center items-center px-2 py-1 text-xs cursor-pointer"*/}
-								{/*			onClick={() => {*/}
-								{/*				setOpenSpeed(false);*/}
-								{/*				setOpenPitch(!openPitch);*/}
-								{/*			}}*/}
-								{/*		>*/}
-								{/*			<span>{`Pitch`}</span>*/}
-								{/*			<DownArrow className="fill-primary mx-1" />*/}
-								{/*		</div>*/}
-								{/*		{openPitch && (*/}
-								{/*			<>*/}
-								{/*				<div className="absolute top-[110%] left-[40%] w-[0px] h-[0px] border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[12px]"></div>*/}
-								{/*				<SliderDropdown positionStyles={`top-[145%] left-[-174%]`} sliderValue={generateBlockDetail.pitch} stepValue={1}*/}
-								{/*					sliderChanged={(value) => updateGenerateBlockDetail("pitch", value)} defaultValue={0} min={-50} max={50} sliderOptions={pitchSliderOptions} />*/}
-								{/*			</>*/}
-								{/*		)}*/}
-								{/*	</div>*/}
-								{/*</ClickAwayListener>*/}
 								<ClickAwayListener onClickAway={() => setOpenSpeed(false)}>
 									<div className="relative">
 										<div
-											className="flex rounded-3xl font-medium border border-gray-300 justify-center items-center px-2 py-1 text-xs cursor-pointer h-[33px]"
+											className={
+												`flex rounded-3xl font-medium border border-gray-300 justify-center items-center px-2 py-1 text-xs cursor-pointer h-[33px] 
+												${selectedAIVoice?.Type != 'standard' ? 'opacity-50' : ''}`
+											}
 											onClick={() => {
 												setOpenPitch(false);
 												setOpenSpeed(!openSpeed);
 											}}
+											style={{ pointerEvents: selectedAIVoice?.Type != 'standard' ? 'none' : 'auto' }}
 										>
 											<span style={{
 												padding: ' 0 0.2rem 0rem 0.5rem' }}>{`Duration`}</span>
@@ -251,8 +249,8 @@ function GenerateAIBlock({
 											<>
 												<div className="absolute top-[110%] left-[40%] w-[0px] h-[0px] border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[12px]"></div>
 												<SliderDropdown
-													positionStyles={`top-[145%] left-[-150%]`} sliderValue={generateBlockDetail.duration} stepValue={0.5}
-													sliderChanged={(value) => updateGenerateBlockDetail("duration", value)} defaultValue={1} min={1} max={3} sliderOptions={speedSliderOptions} />
+													positionStyles={`top-[145%] left-[-150%]`} sliderValue={generateBlockDetail.duration} stepValue={0.25}
+													sliderChanged={(value) => updateGenerateBlockDetail("duration", value)} defaultValue={1} min={1} max={2.25} sliderOptions={speedSliderOptions} />
 
 											</>
 										)}

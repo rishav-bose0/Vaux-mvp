@@ -12,11 +12,11 @@ import loadingGIF from "assets/smallLoader.svg";
 const steps = [
     {
         label: 'VOAUX Sample 1',
-        src: 'https://voaux.s3.ap-south-1.amazonaws.com/promo_videos/merc_voice_over_2_dup.mp4',
+        src: 'https://voaux.s3.ap-south-1.amazonaws.com/promo_videos/merc_voice_over_nds.mp4',
     },
     {
         label: 'VOAUX Sample 2',
-        src: 'https://voaux.s3.ap-south-1.amazonaws.com/promo_videos/summit_voice_over_dup.mp4',
+        src: 'https://voaux.s3.ap-south-1.amazonaws.com/promo_videos/summit_voice.mp4',
     },
 ];
 
@@ -100,7 +100,8 @@ export default function VideoCarousel() {
                         />
                     )}
                 </div>
-                <MobileStepper sx={{ px: '4.5rem', '.MuiMobileStepper-dotActive': {backgroundColor: '#182a75'} }}
+                <MobileStepper
+                    sx={{ backgroundColor: 'rgb(246,247,249)', px: '4.5rem', '.MuiMobileStepper-dotActive': {backgroundColor: '#182a75'} }}
                     steps={maxSteps}
                     position="static"
                     activeStep={activeStep}
