@@ -15,9 +15,11 @@ import { ClickAwayListener, MenuItem, Select, SxProps, Theme } from "@mui/materi
 function GenerateAIBlock({
 	blockDetail,
 	updateBlockDetail,
+	addNewBlocks,
 }: {
 	blockDetail: VAUX_GENERATE_TTS;
 	updateBlockDetail: (item: VAUX_GENERATE_TTS) => void;
+	addNewBlocks: (items: VAUX_GENERATE_TTS[]) => void;
 }) {
 	const [token, setToken] = useLocalStorage("vaux-staff-token", JSON.stringify(null));
 	const { aiVoices } = useContext(AiVoicesContext);
@@ -111,6 +113,12 @@ function GenerateAIBlock({
 		setSelectedAIVoice(result ?? aiVoices[0]);
 	}, [blockDetail]);
 
+
+	const handleAddNewBlocks = (newBlocks: VAUX_GENERATE_TTS[]) => {
+		// Call the function passed from Project to add the new block
+		addNewBlocks(newBlocks);
+	}
+
 	const updateGenerateBlockDetail = (key: string, value: string | number | boolean) => {
         let block = {...generateBlockDetail, [key]: value};
         if (key == "text") {
@@ -118,16 +126,76 @@ function GenerateAIBlock({
             const wordCount = words.length
 			let maxWordCount = 200
 			if (selectedAIVoice.Type !== "standard"){
-				maxWordCount = 70
+				maxWordCount = 60
 			}
+
 
             if (wordCount > maxWordCount) {
                 const truncatedText = words.slice(0, maxWordCount).join(' '); // Limiting to 100 words
                 block = {...generateBlockDetail, [key]: truncatedText};
                 // Show a popup message
-                alert("Word limit per block exceeded. Please create a new block and add text");
-            }
-        }
+				// const remainingText = words.slice(maxWordCount).join(' ');
+				//
+				// const remainingChunks = Math.ceil(remainingText.length / maxWordCount);
+				// const newBlocks = [];
+				//
+				// // Create new blocks for each chunk of remaining text
+				// for (let i = 0; i < remainingChunks; i++) {
+				// 	const chunk = remainingText.slice(i * maxWordCount, (i + 1) * maxWordCount);
+				// 	const newBlock = {
+				// 		project_id: generateBlockDetail.project_id,
+				// 		speaker_id: selectedAIVoice?.Id,
+				// 		text: chunk,
+				// 		language: 'en',
+				// 		emotion: generateBlockDetail.emotion,
+				// 		duration: generateBlockDetail.duration,
+				// 		pitch: generateBlockDetail.pitch,
+				// 		block_number: generateBlockDetail.block_number + i + 1, // Adjust block number for each new block
+				// 		speech_s3_link: '',
+				// 		is_tts_generated: false,
+				// 	};
+
+				const remainingText = words.slice(maxWordCount).join(' ');
+
+				// Split the remaining text into chunks of maxWordCount words
+				const remainingWords = remainingText.split(' ');
+				const chunkedText = [];
+				while (remainingWords.length > 0) {
+					chunkedText.push(remainingWords.splice(0, maxWordCount).join(' '));
+				}
+				// Create new blocks for each chunk of remaining text
+				const newBlocks = chunkedText.map((chunk, index) => ({
+					project_id: generateBlockDetail.project_id,
+					speaker_id: selectedAIVoice?.Id,
+					text: chunk,
+					language: 'en',
+					emotion: generateBlockDetail.emotion,
+					duration: generateBlockDetail.duration,
+					pitch: generateBlockDetail.pitch,
+					block_number: generateBlockDetail.block_number + index + 1, // Adjust block number for each new block
+					speech_s3_link: '',
+					is_tts_generated: false,
+				}));
+				// newBlocks.push(newBlock);
+
+				// Add the new blocks to the state
+				addNewBlocks(newBlocks);
+
+				// // Create a new block with the remaining text
+				// const newBlock: VAUX_GENERATE_TTS = {
+				// 	project_id: generateBlockDetail.project_id,
+				// 	speaker_id: selectedAIVoice?.Id,
+				// 	text: remainingText,
+				// 	language: 'en',
+				// 	emotion: generateBlockDetail.emotion,
+				// 	duration: generateBlockDetail.duration,
+				// 	pitch: generateBlockDetail.pitch,
+				// 	block_number: generateBlockDetail.block_number + 1,
+				// 	speech_s3_link: '',
+				// 	is_tts_generated: false,
+				// };
+			}
+		}
 		if (key != "is_tts_generated") {
 			block["is_tts_generated"]= false;
 		} else {

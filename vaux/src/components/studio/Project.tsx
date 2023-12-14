@@ -34,6 +34,10 @@ function Project() {
     }
   }
 
+  const addNewBlocks = (newBlocks: VAUX_GENERATE_TTS[]) => {
+    setGenerateVoiceBlocks(prevBlocks => [...prevBlocks, ...newBlocks]);
+  }
+
   useEffect(() => {
     if (id) {
       const fetchDetailsById = async () => {
@@ -103,7 +107,7 @@ function Project() {
       {!apiLoading && <div className='mx-auto w-[70%]'>
         { generateVoiceBlocks.length > 0 &&
           generateVoiceBlocks.map((item, index) => {
-            return <GenerateAIBlock key={`generate-block-` + index} blockDetail={item} updateBlockDetail={updateGenerateBlockHandler} />
+            return <GenerateAIBlock key={`generate-block-` + index} blockDetail={item} updateBlockDetail={updateGenerateBlockHandler} addNewBlocks={addNewBlocks}/>
           })
         }
         <div className='flex justify-center gap-2'>

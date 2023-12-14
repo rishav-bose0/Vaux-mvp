@@ -76,12 +76,12 @@ const MainHeader = () => {
 						<ContactUs handleCloseContactUsModal={handleCloseContactUsModal} />
 					</GlobalModal>
 
-					<li className="md:p-4 px-2 block py-3">
+					<li className="md:p-4 px-4 block py-4">
 						<button className="text-white font-medium hover:font-bold border-0 p-0 rounded-none md:border md:border-solid md:border-white md:px-4 md:py-2 md:rounded-xmd" onClick={() => routeChange('/login', { type: 'login' })}>
 							Login
 						</button>
 					</li>
-					<li className="md:p-4 px-2 block py-3">
+					<li className="md:p-4 px-4 block py-4">
 						<button className="text-white font-medium hover:font-bold border-0 p-0 rounded-none md:text-primary md:bg-white md:border md:border-solid md:border-primary md:px-4 md:py-2 md:rounded-xmd" onClick={() => routeChange('/signup', { type: 'signup' })}>
 							Sign Up
 						</button>
