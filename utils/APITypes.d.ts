@@ -1,0 +1,13 @@
+export declare const VAUX_LOGIN = "api/v1/login_user";
+export declare const VAUX_SIGNUP = "api/v1/signup_user";
+export declare const VAUX_VOICE_PREVIEW_TYPE = "api/v1/voice_preview/";
+export declare const VAUX_PROCESS_TTS = "api/v1/process_tts";
+export declare const VAUX_CLONE_VOICE = "api/v1/clone_voice";
+export declare const VAUX_ADD_USER = "api/v1/add_user";
+export declare const VAUX_VOICE_LIST_TYPE = "api/v1/list_all_voices";
+export declare const VAUX_SAMPLE_VOICE_LIST_TYPE = "api/v1/list_sample_voices";
+export declare const VAUX_USER_DETAIL_TYPE = "api/v1/get_user_details/";
+export declare const VAUX_PROJECTS_LIST = "api/v1/list_all_projects_for_user";
+export declare const VAUX_CREATE_PROJECT = "api/v1/create_project";
+export declare const VAUX_FETCH_PROJECT_DETAILS = "api/v1/get_project_details";
+export declare const VAUX_UPDATE_USER = "/api/v1/update_user_details";
