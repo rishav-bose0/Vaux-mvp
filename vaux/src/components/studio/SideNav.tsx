@@ -1,10 +1,11 @@
+import React from "react";
 import { useState } from 'react';
-import ExploreAI from 'components/exploreAI/ExploreAI';
-import GlobalModal from 'components/common/GlobalModal';
-import VoiceImg from 'assets/Explore-ai.png';
-import VoiceClone from 'assets/clone_voice_main.png';
-import TutorialImg from 'assets/tutorials_img.png';
-import ProjectsList from 'assets/projects_list.svg';
+import ExploreAI from '../exploreAI/ExploreAI';
+import GlobalModal from '../common/GlobalModal';
+import VoiceImg from '../../assets/Explore-ai.png';
+import VoiceClone from '../../assets/clone_voice_main.png';
+import TutorialImg from '../../assets/tutorials_img.png';
+import ProjectsList from '../../assets/projects_list.svg';
 import { useNavigate } from 'react-router';
 import Tutorials from "../tutorials/tutorials";
 

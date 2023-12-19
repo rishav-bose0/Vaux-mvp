@@ -1,6 +1,6 @@
-import { useRef, useState } from "react";
-import DropdownItem from "components/common/dropdown/DropdownItems";
-import {ReactComponent as UpArrow} from 'assets/up_arrow.svg';
+import React, { useRef, useState } from "react";
+import DropdownItem from "../dropdown/DropdownItems";
+import {ReactComponent as UpArrow} from '../../assets/up_arrow.svg';
 
 const OptionsDropdown = (props:any) => {
 	/**

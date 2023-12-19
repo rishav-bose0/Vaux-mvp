@@ -1,10 +1,11 @@
+import React from 'react';
 import { useState } from "react";
-import OptionsDropdown from "components/common/dropdown/OptionsDropdown";
-import { Constants } from "utils/constants";
-import GlobalModal from "components/common/GlobalModal";
-import ContactUs from "components/common/ContactUs";
+import OptionsDropdown from "../common/dropdown/OptionsDropdown";
+import { Constants } from "../../utils/constants";
+import GlobalModal from "../common/GlobalModal";
+import ContactUs from "../common/ContactUs";
 import { useNavigate } from "react-router";
-import LOGO from "assets/voaux-logo.png";
+import LOGO from "../../assets/voaux-logo.png";
 
 const MainHeader = () => {
 	const [showMenu, setShowMenu] = useState(false);

@@ -1,13 +1,14 @@
-import AIVoicesListHome from 'components/Home/AIVoicesListHome';
-import { Constants } from 'utils/constants';
-import mainImage from 'assets/main.svg';
-import first_step_image from 'assets/first_step.png';
-import second_step_image from 'assets/second_step.png';
-import third_step_image from 'assets/third_step.png';
-import voiceAi from 'assets/voice_ai.svg';
+import React from "react";
+import AIVoicesListHome from '../Home/AIVoicesListHome';
+import { Constants } from '../../utils/constants';
+import mainImage from '../../assets/main.svg';
+import first_step_image from '../../assets/first_step.png';
+import second_step_image from '../../assets/second_step.png';
+import third_step_image from '../../assets/third_step.png';
+import voiceAi from '../assets/voice_ai.svg';
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { generateTTS } from 'actions/APIActions';
+import { generateTTS } from '../../actions/APIActions';
 import VideoCarousel from './VideoCarousel';
 
 

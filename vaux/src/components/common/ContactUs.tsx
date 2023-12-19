@@ -1,6 +1,7 @@
+import React from "react";
 import { List, ListItem } from "@mui/material";
-import contactUsbanner from "assets/contactUs.svg";
-import { Constants } from "utils/constants";
+import contactUsbanner from "../../assets/contactUs.svg";
+import { Constants } from "../../utils/constants";
 
 const ContactUs = (props:any) => {
 	let {handleCloseContactUsModal} = props;

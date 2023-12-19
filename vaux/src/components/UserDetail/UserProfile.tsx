@@ -1,6 +1,6 @@
-import { fetchUserDetailsById, updateUserDetails } from "actions/APIActions";
-import { useCookie } from "hooks/useCookie";
-import { useLocalStorage } from "hooks/useLocalStorage";
+import { fetchUserDetailsById, updateUserDetails } from "../../actions/APIActions";
+import { useCookie } from "../../hooks/useCookie";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 import React, { useEffect, useState } from "react";
 
 const UserProfile = (props: any) => {

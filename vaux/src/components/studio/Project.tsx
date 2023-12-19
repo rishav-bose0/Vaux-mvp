@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { VAUX_GENERATE_TTS } from 'utils/APIResponseTypes';
-import GenerateAIBlock from 'components/projects/GenerateAIBlock';
-import { ReactComponent as AddCircle } from 'assets/add_circle.svg';
-import { ReactComponent as GenerateButton } from "assets/generate.svg";
-import { ReactComponent as DownloadButton } from "assets/download.svg";
-import { fetchProjectDetailsById, generateTTS } from 'actions/APIActions';
+import { VAUX_GENERATE_TTS } from '../../utils/APIResponseTypes';
+import GenerateAIBlock from '../projects/GenerateAIBlock';
+import SvgAddCircle from "../SvgIcons/AddCircle";
+import SvgGenerate from "../SvgIcons/Generate";
+import SvgDownload from "../SvgIcons/Download";
+import { fetchProjectDetailsById, generateTTS } from '../../actions/APIActions';
 import { useParams } from 'react-router';
-import { AiVoicesContext } from 'context/AiVoicesContext';
-import { useLocalStorage } from 'hooks/useLocalStorage';
-import loadingGIF from "assets/smallLoader.svg";
-import { SelectedProjectContext } from 'context/SelectedProjectContext';
-import Loader from 'components/common/Loader';
+import { AiVoicesContext } from '../../context/AiVoicesContext';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
+import loadingGIF from "../../assets/smallLoader.svg";
+import { SelectedProjectContext } from '../../context/SelectedProjectContext';
+import Loader from '../common/Loader';
 
 
 function Project() {
@@ -113,12 +113,12 @@ function Project() {
         <div className='flex justify-center gap-2'>
           {!loading && <>
             <div className='flex justify-center items-center rounded-3xl border border-gray-300 text-center px-2 py-1 text-xs cursor-pointer hover:bg-gray-200' onClick={addBlockHandler}>
-              <AddCircle className='w-5 h-5 fill-black' />
+              <SvgAddCircle className='w-5 h-5 fill-black' />
               <span className='text-gray-500 font-semibold'>{`Add a block`}</span>
             </div>
             {generateVoiceBlocks.length > 1 &&
               <div className='flex justify-center items-center rounded-3xl border border-gray-300 text-center px-2 py-1 text-xs cursor-pointer hover:bg-gray-200' onClick={generatePlayAllHandler}>
-                <GenerateButton className='w-4 h-4 mr-1' style={{ padding: '0.1rem', filter: 'brightness(0) saturate(100%) invert(47%) sepia(8%) saturate(664%) hue-rotate(182deg) brightness(92%) contrast(86%)' }} />
+                <SvgGenerate className='w-4 h-4 mr-1' style={{ padding: '0.1rem', filter: 'brightness(0) saturate(100%) invert(47%) sepia(8%) saturate(664%) hue-rotate(182deg) brightness(92%) contrast(86%)' }} />
                 <span className='text-gray-500 font-semibold'>{`Play All`}</span>
               </div>
             }
@@ -127,7 +127,7 @@ function Project() {
                 href={playAllAudioLink}
                 download={`all.wav`}
               >
-                <DownloadButton className='w-4 h-4 mr-1' style={{ padding: '0.1rem', filter: 'brightness(0) saturate(100%) invert(47%) sepia(8%) saturate(664%) hue-rotate(182deg) brightness(92%) contrast(86%)' }} />
+                <SvgDownload className='w-4 h-4 mr-1' style={{ padding: '0.1rem', filter: 'brightness(0) saturate(100%) invert(47%) sepia(8%) saturate(664%) hue-rotate(182deg) brightness(92%) contrast(86%)' }} />
                 <span className='text-gray-500 font-semibold'>{`Download All`}</span>
               </a>
             }

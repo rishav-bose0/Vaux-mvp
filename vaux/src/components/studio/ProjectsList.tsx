@@ -1,11 +1,12 @@
-import { fetchProjectsListByUser } from "actions/APIActions";
-import { useCookie } from "hooks/useCookie";
+import React from "react";
+import { fetchProjectsListByUser } from "../../actions/APIActions";
+import { useCookie } from "../../hooks/useCookie";
 import { useEffect, useState } from "react"
-import { VAUX_PROJECT_LIST_ITEM } from "utils/APIResponseTypes";
-import ProjectFolder from "assets/project_folder.svg";
+import { VAUX_PROJECT_LIST_ITEM } from "../../utils/APIResponseTypes";
+import ProjectFolder from "../../assets/project_folder.svg";
 import { useNavigate } from "react-router";
-import { useLocalStorage } from "hooks/useLocalStorage";
-import Loader from "components/common/Loader";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+import Loader from "../common/Loader";
 
 function ProjectsList() {
 
@@ -23,10 +24,10 @@ function ProjectsList() {
             if (data && Array.isArray(data)) {
                 setProjectsList(data)
             }
-            else if(data?.Error) {
-                console.log(data.Error);
-                setProjectsList([]);
-            }
+            // else if('Error' in data) {
+            //     console.log(data.Error);
+            //     setProjectsList([]);
+            // }
             else {
                 setProjectsList([]);
             }

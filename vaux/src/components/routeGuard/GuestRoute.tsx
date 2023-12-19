@@ -1,5 +1,6 @@
-import { useAuth } from "hooks/useAuth";
-import { AuthContext } from "context/AuthContext";
+import React from 'react';
+import { useAuth } from "../../hooks/useAuth";
+import { AuthContext } from "../../context/AuthContext";
 
 export const GuestRoute = ({ children }: { children: any }) => {
   const { token, setToken }: any = useAuth();

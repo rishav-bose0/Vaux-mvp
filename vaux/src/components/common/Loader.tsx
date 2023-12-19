@@ -1,4 +1,5 @@
-import LoaderSvg from 'assets/Loader.svg';
+import React from "react";
+import LoaderSvg from '../../assets/Loader.svg';
 
 function Loader() {
   return (

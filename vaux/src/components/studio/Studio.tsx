@@ -1,7 +1,8 @@
-import AuthHeader from 'components/studio/AuthHeader';
-import SideNav from 'components/studio/SideNav';
-import AiVoicesProvider from 'context/AiVoicesContext';
-import SelectedProjectProvider from 'context/SelectedProjectContext';
+import React from "react";
+import AuthHeader from '../studio/AuthHeader';
+import SideNav from '../studio/SideNav';
+import AiVoicesProvider from '../../context/AiVoicesContext';
+import SelectedProjectProvider from '../../context/SelectedProjectContext';
 
 function Studio({ content }: any) {
     return (

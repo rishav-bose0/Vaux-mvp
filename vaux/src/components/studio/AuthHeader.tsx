@@ -1,5 +1,6 @@
-import CreateProject from "components/common/CreateProject";
-import GlobalModal from "components/common/GlobalModal";
+import React from "react";
+import CreateProject from "../common/CreateProject";
+import GlobalModal from "../common/GlobalModal";
 import { useContext, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
@@ -9,14 +10,14 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
-import UserProfile from "components/UserDetail/UserProfile";
-import { useAuth } from "hooks/useAuth";
+import UserProfile from "../UserDetail/UserProfile";
+import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router";
-import { useLocalStorage } from "hooks/useLocalStorage";
-import { SelectedProjectContext } from "context/SelectedProjectContext";
-import ContactUs from "components/common/ContactUs";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { SelectedProjectContext } from "../../context/SelectedProjectContext";
+import ContactUs from "../common/ContactUs";
 import Email from "@mui/icons-material/Email";
-import LOGO from "assets/voaux-profile-logo.png";
+import LOGO from "../../assets/voaux-profile-logo.png";
 
 function AuthHeader() {
 	const { logout }: any = useAuth();

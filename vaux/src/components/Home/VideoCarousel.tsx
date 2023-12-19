@@ -1,13 +1,13 @@
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 import MobileStepper from '@mui/material/MobileStepper';
-import playBtn from "assets/play.svg";
-import pauseBtn from "assets/pause.svg";
+import playBtn from "../../assets/play.svg";
+import pauseBtn from "../../assets/pause.svg";
 import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import loadingGIF from "assets/smallLoader.svg";
+import loadingGIF from "../../assets/smallLoader.svg";
 
 const steps = [
     {

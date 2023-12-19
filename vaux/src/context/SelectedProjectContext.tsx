@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import React, { createContext, useState } from "react";
 
 export const SelectedProjectContext = createContext<{project: {id: string | null, name: string | null}, setSelectedProject: (project: {id: string | null, name: string | null}) => void}>
 ({project: {id: null, name: null}, setSelectedProject: () => {}});

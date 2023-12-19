@@ -4,7 +4,7 @@ import { VAUX_LOGIN } from './APITypes';
 
 const { baseURL } = environment || {};
 const commonConfig = {
-  timeout: 120 * 1000,
+  timeout: 300 * 1000,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',

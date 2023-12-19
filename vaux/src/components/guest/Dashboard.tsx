@@ -1,5 +1,6 @@
-import MainHeader from "components/Home/MainHeader"
-import Overview from "components/Home/Overview"
+import React from 'react';
+import MainHeader from "../Home/MainHeader"
+import Overview from "../Home/Overview"
 
 
 

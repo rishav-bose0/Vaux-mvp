@@ -1,11 +1,11 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import { getAllAIVoiceSample } from "actions/APIActions";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { getAllAIVoiceSample } from "../../actions/APIActions";
 import ExploreAIVoiceItem from "./ExploreAIItem";
-import { VAUX_AI_VOICES } from "utils/APIResponseTypes";
-import { useCookie } from "hooks/useCookie";
-import { AiVoicesContext } from "context/AiVoicesContext";
-import { useLocalStorage } from "hooks/useLocalStorage";
-import usePageVisibility from "hooks/usePageVisibility";
+import { VAUX_AI_VOICES } from "../../utils/APIResponseTypes";
+import { useCookie } from "../../hooks/useCookie";
+import { AiVoicesContext } from "../../context/AiVoicesContext";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+import usePageVisibility from "../../hooks/usePageVisibility";
 interface ExploreAIProps {
 	isSelectionRequired?: boolean;
 	selectedAiVoice?: VAUX_AI_VOICES;

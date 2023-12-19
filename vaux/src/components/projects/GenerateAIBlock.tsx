@@ -1,15 +1,16 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import { ReactComponent as DownArrow } from "assets/dropdown_arrow.svg";
-import { ReactComponent as GenerateButton } from "assets/generate.svg";
-import { ReactComponent as DownloadButton } from "assets/download.svg";
-import loadingGIF from "assets/smallLoader.svg";
-import GlobalModal from "components/common/GlobalModal";
-import ExploreAI from "components/exploreAI/ExploreAI";
-import { VAUX_GENERATE_TTS } from "utils/APIResponseTypes";
-import { generateTTS } from "actions/APIActions";
-import SliderDropdown from "components/common/SliderDropdown";
-import { AiVoicesContext } from 'context/AiVoicesContext';
-import { useLocalStorage } from "hooks/useLocalStorage";
+import React, { useContext, useEffect, useRef, useState } from "react";
+// import { SvgDropdownArrow as DownArrow } from "../../assets/dropdown_arrow.svg";
+import SvgDropdownArrow  from "../SvgIcons/DropdownArrow";
+import SvgGenerate from "../SvgIcons/Generate";
+import SvgDownload from "../SvgIcons/Download";
+import loadingGIF from "../../assets/smallLoader.svg";
+import GlobalModal from "../common/GlobalModal";
+import ExploreAI from "../exploreAI/ExploreAI";
+import { VAUX_GENERATE_TTS } from "../../utils/APIResponseTypes";
+import { generateTTS } from "../../actions/APIActions";
+import SliderDropdown from "../common/SliderDropdown";
+import { AiVoicesContext } from '../../context/AiVoicesContext';
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { ClickAwayListener, MenuItem, Select, SxProps, Theme } from "@mui/material";
 
 function GenerateAIBlock({
@@ -29,6 +30,7 @@ function GenerateAIBlock({
 	const downloadAudioRef = useRef<HTMLAnchorElement>(null);
 	const [openPitch, setOpenPitch] = useState(false);
 	const [openSpeed, setOpenSpeed] = useState(false);
+	const [isCopyPaste, setIsCopyPaste] = useState(false);
 	const [generateBlockDetail, setGenerateBlockDetail] = useState(blockDetail);
 	const [selectedAIVoice, setSelectedAIVoice] = useState(aiVoices[0]);
 
@@ -124,7 +126,7 @@ function GenerateAIBlock({
         if (key == "text") {
             const words = value.toString().split(/\s+/);
             const wordCount = words.length
-			let maxWordCount = 200
+			let maxWordCount = 80
 			if (selectedAIVoice.Type !== "standard"){
 				maxWordCount = 60
 			}
@@ -133,28 +135,15 @@ function GenerateAIBlock({
             if (wordCount > maxWordCount) {
                 const truncatedText = words.slice(0, maxWordCount).join(' '); // Limiting to 100 words
                 block = {...generateBlockDetail, [key]: truncatedText};
-                // Show a popup message
-				// const remainingText = words.slice(maxWordCount).join(' ');
-				//
-				// const remainingChunks = Math.ceil(remainingText.length / maxWordCount);
-				// const newBlocks = [];
-				//
-				// // Create new blocks for each chunk of remaining text
-				// for (let i = 0; i < remainingChunks; i++) {
-				// 	const chunk = remainingText.slice(i * maxWordCount, (i + 1) * maxWordCount);
-				// 	const newBlock = {
-				// 		project_id: generateBlockDetail.project_id,
-				// 		speaker_id: selectedAIVoice?.Id,
-				// 		text: chunk,
-				// 		language: 'en',
-				// 		emotion: generateBlockDetail.emotion,
-				// 		duration: generateBlockDetail.duration,
-				// 		pitch: generateBlockDetail.pitch,
-				// 		block_number: generateBlockDetail.block_number + i + 1, // Adjust block number for each new block
-				// 		speech_s3_link: '',
-				// 		is_tts_generated: false,
-				// 	};
-
+				if (!isCopyPaste){
+					block["is_tts_generated"]= false;
+					alert("Word limit per block exceeded. Please create a new block and add text");
+					setGenerateBlockDetail(() => {
+						return {...block};
+					});
+					updateBlockDetail({...block});
+					return
+				}
 				const remainingText = words.slice(maxWordCount).join(' ');
 
 				// Split the remaining text into chunks of maxWordCount words
@@ -176,24 +165,9 @@ function GenerateAIBlock({
 					speech_s3_link: '',
 					is_tts_generated: false,
 				}));
-				// newBlocks.push(newBlock);
 
 				// Add the new blocks to the state
 				addNewBlocks(newBlocks);
-
-				// // Create a new block with the remaining text
-				// const newBlock: VAUX_GENERATE_TTS = {
-				// 	project_id: generateBlockDetail.project_id,
-				// 	speaker_id: selectedAIVoice?.Id,
-				// 	text: remainingText,
-				// 	language: 'en',
-				// 	emotion: generateBlockDetail.emotion,
-				// 	duration: generateBlockDetail.duration,
-				// 	pitch: generateBlockDetail.pitch,
-				// 	block_number: generateBlockDetail.block_number + 1,
-				// 	speech_s3_link: '',
-				// 	is_tts_generated: false,
-				// };
 			}
 		}
 		if (key != "is_tts_generated") {
@@ -277,7 +251,7 @@ function GenerateAIBlock({
 										alt={selectedAIVoice?.Name}
 									/>
 									<span>{`${selectedAIVoice?.Name} (${selectedAIVoice?.Gender})`}</span>
-									<DownArrow className="fill-primary mx-2" />
+									<SvgDropdownArrow className="fill-primary mx-2" />
 								</div>
 								<div
 									className="flex rounded-3xl font-medium border border-gray-300 justify-center items-center px-2 py-1 text-xs cursor-pointer">
@@ -311,7 +285,7 @@ function GenerateAIBlock({
 										>
 											<span style={{
 												padding: ' 0 0.2rem 0rem 0.5rem' }}>{`Duration`}</span>
-											<DownArrow className="fill-primary mx-1" />
+											<SvgDropdownArrow className="fill-primary mx-1" />
 										</div>
 										{openSpeed && (
 											<>
@@ -329,7 +303,7 @@ function GenerateAIBlock({
 							<div className="float-right">
 								{!isLoading && (
 									<div className="flex gap-2  items-center">
-										<GenerateButton
+										<SvgGenerate
 											className="w-[24px] font-medium h-[24px] cursor-pointer "
 											onClick={handleTTSListen}
 										/>
@@ -340,7 +314,7 @@ function GenerateAIBlock({
 												download={`VOAUX-${selectedAIVoice.Name + "-" + selectedAIVoice.Id
 													}.wav`}
 											>
-												<DownloadButton
+												<SvgDownload
 													className="w-[24px] font-medium h-[24px] cursor-pointer"
 													onClick={handleDownloadTTS}
 												/>
@@ -361,9 +335,13 @@ function GenerateAIBlock({
 						<div>
 							<input
 								value={generateBlockDetail.text}
-								onChange={(event) =>
+								onChange={(event) => {
 									updateGenerateBlockDetail("text", event?.target?.value)
-								}
+								}}
+								onPaste={() => {
+									setIsCopyPaste(true)
+								}}
+								onKeyDown={() => setIsCopyPaste(false)}
 								type="text"
 								placeholder="Enter your text here"
 								className="text-sm font-normal border border-gray-300 rounded-md w-full p-2 mt-4 focus-visible:outline-none"

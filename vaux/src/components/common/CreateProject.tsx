@@ -1,6 +1,6 @@
-import { createProject } from 'actions/APIActions';
-import { useCookie } from 'hooks/useCookie';
-import { useLocalStorage } from 'hooks/useLocalStorage';
+import { createProject } from '../../actions/APIActions';
+import { useCookie } from '../../hooks/useCookie';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 

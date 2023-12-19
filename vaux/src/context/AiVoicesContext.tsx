@@ -1,5 +1,5 @@
-import { createContext, useState } from "react";
-import { VAUX_AI_VOICES } from "utils/APIResponseTypes";
+import React, { createContext, useState } from "react";
+import { VAUX_AI_VOICES } from "../utils/APIResponseTypes";
 
 export const AiVoicesContext = createContext<{aiVoices: VAUX_AI_VOICES[], addAiVoice: (voice: VAUX_AI_VOICES[]) => void}>({aiVoices: [], addAiVoice: () => {}})
 

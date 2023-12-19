@@ -1,12 +1,13 @@
-import google from 'assets/google.svg';
+import React from 'react';
+import google from '../../assets/google.svg';
 import { useGoogleLogin } from '@react-oauth/google';
-import signin from 'assets/signin.svg';
-import { login, userSignup } from 'actions/APIActions';
+import signin from '../../assets/signin.svg';
+import { login, userSignup } from '../../actions/APIActions';
 import { useNavigate } from 'react-router';
 import { useState } from 'react';
-import { useLocalStorage } from 'hooks/useLocalStorage';
-import { decodeToken } from 'utils/common.utils';
-import Loader from 'components/common/Loader';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { decodeToken } from '../../utils/common.utils';
+import Loader from '../common/Loader';
 
 function Login() {
 

@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from "react";
-import playBtn from "assets/play.svg";
-import pauseBtn from "assets/pause.svg";
-import { VAUX_AI_VOICES } from "utils/APIResponseTypes";
-import { fetchAIVoicePreview } from "actions/APIActions";
-import { Constants } from "utils/constants";
-import smallLoader from "assets/smallLoader.svg";
-import premium_icon from "assets/premium_2.png";
-import cloned_voice_icon from "assets/cloned_voice.png";
+import React, { useEffect, useRef, useState } from "react";
+import playBtn from "../../assets/play.svg";
+import pauseBtn from "../../assets/pause.svg";
+import { VAUX_AI_VOICES } from "../../utils/APIResponseTypes";
+import { fetchAIVoicePreview } from "../../actions/APIActions";
+import { Constants } from "../../utils/constants";
+import smallLoader from "../../assets/smallLoader.svg";
+import premium_icon from "../../assets/premium_2.png";
+import cloned_voice_icon from "../../assets/cloned_voice.png";
 
 interface ExploreAIVoiceItemPropsInterface {
 	AIVoiceItem: VAUX_AI_VOICES;
